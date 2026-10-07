@@ -1,0 +1,65 @@
+name: release
+
+# Obsidian installs a theme from the GitHub release whose tag equals the version in
+# manifest.json, taking theme.css and manifest.json from its assets. A pushed tag
+# x.y.z, with no v, is checked against the manifest, run through build.yml, and released
+# with a theme.css built from that tag's own sources and the changelog's section as notes
+on:
+  push:
+    tags: ["[0-9]+.[0-9]+.[0-9]+"]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    uses: ./.github/workflows/build.yml
+    with:
+      ref: ${{ github.ref_name }}
+
+  release:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: the tag is the manifest's version
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          version=$(jq -er .version manifest.json)
+          [ "$TAG" = "$version" ] || {
+            echo "tag $TAG but manifest.json says $version" >&2
+            exit 1
+          }
+
+      - name: build the theme from this tag
+        run: ./generate.sh build
+
+      # The notes are the changelog's section for this version: from its heading to the
+      # next one, without the heading itself
+      - name: release notes from CHANGELOG.md
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          awk -v head="## [$TAG] - " '
+            index($0, head) == 1 { on = 1; next }
+            on && /^## / { exit }
+            on && /^\[[^]]+\]: / { next }
+            on { print }
+          ' CHANGELOG.md >notes.md
+          grep -q '[^[:space:]]' notes.md || {
+            echo "CHANGELOG.md has no section for $TAG" >&2
+            exit 1
+          }
+
+      - name: publish the release with the theme and its manifest
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: gh release create "$TAG" theme.css manifest.json --title "$TAG" --notes-file notes.md --verify-tag

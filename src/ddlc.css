@@ -1,0 +1,766 @@
+/* The look of the game itself: the menu's drifting polka-dot paper, the poem
+   sheet under the text, callouts as the "Just Monika." pop-up, the outlined
+   menu lettering. The dark side is the same club on a violet ink sheet, where
+   the pop-up stays pale the way it does over the game's dark screen.
+   Every colour is a --ddlc-* palette token; shades the palette lacks are mixed,
+   and a translucent one is a mix with transparent */
+
+body {
+  /* ddlc.moe tilebg.png: a 200 px tile, dots of radius 40 on a half-step grid */
+  --ddlc-tile: 120px;
+  --ddlc-dot-r: calc(var(--ddlc-tile) / 5);
+  --ddlc-radius: 12px;
+  --ddlc-heading-font: "Doki", var(--font-text);
+
+  --radius-s: 6px;
+  --radius-m: var(--ddlc-radius);
+  --radius-l: 16px;
+  --h1-font: var(--ddlc-heading-font);
+  --h2-font: var(--ddlc-heading-font);
+  --h3-font: var(--ddlc-heading-font);
+  --h4-font: var(--ddlc-heading-font);
+  --h5-font: var(--ddlc-heading-font);
+  --h6-font: var(--ddlc-heading-font);
+  --h1-weight: 400;
+  --h2-weight: 400;
+  --h3-weight: 400;
+  --h4-weight: 400;
+  --h5-weight: 400;
+  --h6-weight: 400;
+  --bold-weight: inherit;
+  --checkbox-radius: 4px;
+}
+
+/* The named colours read the same on paper and on ink; Obsidian itself still
+   reads two of them as rgb triples */
+.theme-light,
+.theme-dark {
+  --color-red: var(--ddlc-bow);
+  --color-red-rgb: var(--ddlc-bow-rgb);
+  --color-orange: var(--ddlc-sayori);
+  --color-yellow: var(--ddlc-monika);
+  --color-green: var(--ddlc-monika-eye);
+  --color-green-rgb: var(--ddlc-monika-eye-rgb);
+  --color-cyan: var(--ddlc-sayori-eye);
+  --color-blue: var(--ddlc-rule);
+  --color-purple: var(--ddlc-yuri);
+  --color-pink: var(--ddlc-pink);
+}
+
+.theme-light {
+  --ddlc-ground: var(--ddlc-paper);
+  --ddlc-dots: var(--ddlc-dot);
+  --ddlc-accent: var(--ddlc-plum);
+  --ddlc-outline: var(--ddlc-plum);
+  --ddlc-muted: color-mix(in srgb, var(--ddlc-ink) 55%, var(--ddlc-jacket));
+
+  --background-primary: var(--ddlc-paper);
+  --background-primary-alt: color-mix(in srgb, var(--ddlc-dot) 45%, var(--ddlc-paper));
+  --background-secondary: color-mix(in srgb, var(--ddlc-dot) 35%, var(--ddlc-paper));
+  --background-secondary-alt: color-mix(in srgb, var(--ddlc-dot) 60%, var(--ddlc-paper));
+  --background-modifier-border: var(--ddlc-blush);
+  --background-modifier-border-hover: var(--ddlc-pink);
+  --background-modifier-border-focus: var(--ddlc-plum);
+  --background-modifier-hover: color-mix(in srgb, var(--ddlc-blush) 45%, transparent);
+  --background-modifier-active-hover: color-mix(in srgb, var(--ddlc-blush) 70%, transparent);
+  --text-normal: var(--ddlc-ink);
+  --text-muted: var(--ddlc-muted);
+  --text-faint: var(--ddlc-jacket);
+  --text-accent: var(--ddlc-plum);
+  --text-accent-hover: var(--ddlc-pink);
+  --text-on-accent: var(--ddlc-paper);
+  --text-selection: color-mix(in srgb, var(--ddlc-blush) 80%, transparent);
+  --text-highlight-bg: color-mix(in srgb, var(--ddlc-blush) 85%, transparent);
+  --interactive-accent: var(--ddlc-plum);
+  --interactive-accent-hover: var(--ddlc-pink);
+  --code-background: color-mix(in srgb, var(--ddlc-dot) 70%, var(--ddlc-paper));
+  --code-normal: var(--ddlc-ink);
+  --bold-color: var(--ddlc-plum);
+  --italic-color: var(--ddlc-yuri);
+  --table-border-color: var(--ddlc-blush);
+  --table-header-background: color-mix(in srgb, var(--ddlc-dot) 80%, transparent);
+  --tag-background: color-mix(in srgb, var(--ddlc-blush) 50%, transparent);
+  --tag-color: var(--ddlc-plum);
+}
+
+.theme-dark {
+  --ddlc-ground: var(--ddlc-ink);
+  --ddlc-dots: color-mix(in srgb, var(--ddlc-yuri-shadow) 75%, var(--ddlc-ink));
+  --ddlc-accent: var(--ddlc-pink);
+  --ddlc-outline: var(--ddlc-yuri);
+  --ddlc-muted: color-mix(in srgb, var(--ddlc-jacket) 75%, var(--ddlc-paper));
+
+  --background-primary: color-mix(in srgb, var(--ddlc-yuri) 18%, var(--ddlc-ink));
+  --background-primary-alt: var(--ddlc-yuri-shadow);
+  --background-secondary: color-mix(in srgb, var(--ddlc-yuri-shadow) 45%, var(--ddlc-ink));
+  --background-secondary-alt: color-mix(in srgb, var(--ddlc-yuri-shadow) 70%, var(--ddlc-ink));
+  --background-modifier-border: var(--ddlc-yuri);
+  --background-modifier-border-hover: var(--ddlc-plum);
+  --background-modifier-border-focus: var(--ddlc-pink);
+  --background-modifier-hover: color-mix(in srgb, var(--ddlc-yuri) 45%, transparent);
+  --background-modifier-active-hover: color-mix(in srgb, var(--ddlc-yuri) 70%, transparent);
+  --text-normal: var(--ddlc-paper);
+  --text-muted: var(--ddlc-muted);
+  --text-faint: var(--ddlc-jacket);
+  --text-accent: var(--ddlc-pink);
+  --text-accent-hover: var(--ddlc-blush);
+  --text-on-accent: var(--ddlc-paper);
+  --text-selection: color-mix(in srgb, var(--ddlc-yuri) 90%, transparent);
+  --text-highlight-bg: color-mix(in srgb, var(--ddlc-plum) 55%, transparent);
+  --interactive-accent: var(--ddlc-plum);
+  --interactive-accent-hover: var(--ddlc-pink);
+  --code-background: var(--ddlc-ink);
+  --code-normal: var(--ddlc-paper);
+  --bold-color: var(--ddlc-blush);
+  --italic-color: var(--ddlc-natsuki);
+  --table-border-color: var(--ddlc-yuri);
+  --table-header-background: color-mix(in srgb, var(--ddlc-yuri) 35%, transparent);
+  --tag-background: color-mix(in srgb, var(--ddlc-blush) 85%, transparent);
+  --tag-color: var(--ddlc-yuri-shadow);
+}
+
+/* the menu's paper: dots on the half-step grid, drifting one tile at a time.
+   The drift moves a layer by transform, so the compositor shifts it without
+   repainting the note under it */
+.workspace-leaf-content[data-type="markdown"] .view-content {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: var(--ddlc-ground);
+}
+
+.workspace-leaf-content[data-type="markdown"] .view-content::before {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--ddlc-tile)) 0 0 calc(-1 * var(--ddlc-tile));
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle var(--ddlc-dot-r) at 25% 25%, var(--ddlc-dots) calc(100% - 1px), transparent 100%),
+    radial-gradient(circle var(--ddlc-dot-r) at 75% 75%, var(--ddlc-dots) calc(100% - 1px), transparent 100%);
+  background-size: var(--ddlc-tile) var(--ddlc-tile);
+  animation: ddlc-drift 8s linear infinite;
+}
+
+@keyframes ddlc-drift {
+  to { transform: translate(var(--ddlc-tile), var(--ddlc-tile)); }
+}
+
+.workspace-leaf-content[data-type="markdown"] .markdown-source-view,
+.workspace-leaf-content[data-type="markdown"] .markdown-reading-view,
+.workspace-leaf-content[data-type="markdown"] .cm-scroller,
+.workspace-leaf-content[data-type="markdown"] .markdown-preview-view {
+  background-color: transparent;
+}
+
+/* the poem sheet: the text column on paper, drawn by a spread shadow so the
+   layout does not move */
+body {
+  --ddlc-sheet-pad: 2.5em;
+}
+
+.theme-light {
+  --ddlc-sheet: var(--ddlc-paper);
+  --ddlc-sheet-edge: var(--ddlc-blush);
+  --ddlc-rule-line: color-mix(in srgb, var(--ddlc-rule) 22%, transparent);
+}
+
+.theme-dark {
+  --ddlc-sheet: color-mix(in srgb, var(--ddlc-yuri) 18%, var(--ddlc-ink));
+  --ddlc-sheet-edge: var(--ddlc-yuri);
+  --ddlc-rule-line: color-mix(in srgb, var(--ddlc-rule) 35%, transparent);
+}
+
+.markdown-preview-sizer,
+.markdown-source-view .cm-sizer {
+  background-color: var(--ddlc-sheet);
+  box-shadow:
+    0 0 0 var(--ddlc-sheet-pad) var(--ddlc-sheet),
+    0 0 0 calc(var(--ddlc-sheet-pad) + 2px) var(--ddlc-sheet-edge),
+    calc(var(--ddlc-sheet-pad) * 0.25) calc(var(--ddlc-sheet-pad) * 0.25) 0 calc(var(--ddlc-sheet-pad) + 2px) var(--ddlc-sheet-edge);
+}
+
+/* the sheet's rules: one under every visual line, a block at a time, so the
+   period follows each block's own line height; 1lh is that height */
+.markdown-rendered p,
+.markdown-rendered li,
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3,
+.markdown-rendered h4,
+.markdown-rendered h5,
+.markdown-rendered h6,
+.markdown-source-view.mod-cm6 .cm-line:not(.HyperMD-codeblock):not(.HyperMD-table-row) {
+  background-image: linear-gradient(to bottom, transparent calc(100% - 1px), var(--ddlc-rule-line) calc(100% - 1px));
+  background-size: 100% 1lh;
+}
+
+/* In Live Preview a heading line carries a top padding, and the rule's period
+   starts above it, so 1lh would rule through the letters; a heading line takes
+   one rule along its foot instead */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header:not(.HyperMD-codeblock):not(.HyperMD-table-row) {
+  background-size: 100% 100%;
+}
+
+/* a pop-up, a pinned note and a table are not written on the sheet */
+.markdown-rendered .callout p,
+.markdown-rendered .callout li,
+.markdown-rendered .callout h1,
+.markdown-rendered .callout h2,
+.markdown-rendered .callout h3,
+.markdown-rendered .callout h4,
+.markdown-rendered .callout h5,
+.markdown-rendered .callout h6,
+.markdown-rendered blockquote p,
+.markdown-rendered blockquote li,
+.markdown-rendered table p {
+  background-image: none;
+}
+
+/* Live Preview rows that are not written on: a quote row and the divider row.
+   The chain of :not() matches the ruling rule's weight, so these win by order */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-quote:not(.HyperMD-codeblock):not(.HyperMD-table-row),
+.markdown-source-view.mod-cm6 .cm-line.hr:not(.HyperMD-codeblock):not(.HyperMD-table-row) {
+  background-image: none;
+}
+
+/* the divider is the fold of an exercise book's spread: a crease line, a soft
+   shade either side of it, and the two staples across it. It spans the sheet's
+   margins up to the inner side of its edge, which a horizontal margin reaches
+   without touching the vertical rhythm. Live Preview paints every widget row
+   under contain: paint !important, which cuts at the row's own box, and pins
+   every row's margins at 0 !important; so there the row is widened and shifted
+   instead, and the rule inside it fills the row */
+.theme-light {
+  --ddlc-fold-shade: color-mix(in srgb, var(--ddlc-jacket) 22%, transparent);
+  --ddlc-staple: var(--ddlc-jacket);
+}
+
+.theme-dark {
+  --ddlc-fold-shade: color-mix(in srgb, var(--ddlc-ink) 55%, transparent);
+  --ddlc-staple: var(--ddlc-ash);
+}
+
+.markdown-rendered hr {
+  margin-left: calc(-1 * var(--ddlc-sheet-pad));
+  margin-right: calc(-1 * var(--ddlc-sheet-pad));
+}
+
+.markdown-source-view.mod-cm6 .cm-line.hr {
+  position: relative;
+  left: calc(-1 * var(--ddlc-sheet-pad));
+  width: calc(100% + 2 * var(--ddlc-sheet-pad));
+  max-width: none;
+}
+
+.markdown-rendered hr,
+.markdown-source-view.mod-cm6 .hr hr {
+  height: 1.8em;
+  border: none;
+  background:
+    linear-gradient(var(--ddlc-staple), var(--ddlc-staple)) 30% 50% / 1.6em 3px no-repeat,
+    linear-gradient(var(--ddlc-staple), var(--ddlc-staple)) 70% 50% / 1.6em 3px no-repeat,
+    linear-gradient(var(--ddlc-sheet-edge), var(--ddlc-sheet-edge)) 0 50% / 100% 1px no-repeat,
+    linear-gradient(to bottom, transparent, var(--ddlc-fold-shade) 50%, transparent);
+}
+
+/* the menu's lettering: white inside an outline, on paper and on ink alike */
+.markdown-rendered h1,
+.markdown-rendered h2,
+.HyperMD-header-1 .cm-header-1,
+.HyperMD-header-2 .cm-header-2,
+.inline-title {
+  color: var(--ddlc-paper);
+  -webkit-text-stroke: 0.14em var(--ddlc-outline);
+  paint-order: stroke fill;
+  letter-spacing: 0.02em;
+}
+
+.markdown-rendered h3,
+.markdown-rendered h4,
+.markdown-rendered h5,
+.markdown-rendered h6,
+.HyperMD-header-3 .cm-header-3,
+.HyperMD-header-4 .cm-header-4,
+.HyperMD-header-5 .cm-header-5,
+.HyperMD-header-6 .cm-header-6 {
+  color: var(--ddlc-accent);
+}
+
+/* The "Just Monika." pop-up: a pale ground in a plain thick blush frame, the
+   title lettered like its OK button. It stays pale on the dark sheet too, the
+   way the pop-up stands over the game's dark screen. Every type wears the same
+   colours; the type speaks through its icon alone */
+.theme-light,
+.theme-dark {
+  --callout-default: var(--ddlc-accent);
+  --callout-info: var(--ddlc-accent);
+  --callout-todo: var(--ddlc-accent);
+  --callout-important: var(--ddlc-accent);
+  --callout-tip: var(--ddlc-accent);
+  --callout-success: var(--ddlc-accent);
+  --callout-question: var(--ddlc-accent);
+  --callout-warning: var(--ddlc-accent);
+  --callout-fail: var(--ddlc-accent);
+  --callout-error: var(--ddlc-accent);
+  --callout-bug: var(--ddlc-accent);
+  --callout-example: var(--ddlc-accent);
+  --callout-quote: var(--ddlc-accent);
+  --callout-summary: var(--ddlc-accent);
+}
+
+.theme-light {
+  --ddlc-popup: color-mix(in srgb, var(--ddlc-dot) 70%, var(--ddlc-paper));
+}
+
+.theme-dark {
+  --ddlc-popup: var(--ddlc-dot);
+}
+
+.callout {
+  --callout-padding: 0.9em 1.3em 1em;
+  --callout-radius: 0;
+  border: 6px solid var(--ddlc-blush);
+  background-color: var(--ddlc-popup);
+}
+
+/* on the dark sheet the pale pop-up writes in ink; plum alone is 3.4:1 on dot,
+   so the accents inside are plum darkened with ink */
+.theme-dark .callout {
+  --text-normal: var(--ddlc-ink);
+  --text-muted: color-mix(in srgb, var(--ddlc-ink) 55%, var(--ddlc-jacket));
+  --text-faint: var(--ddlc-jacket);
+  --text-accent: color-mix(in srgb, var(--ddlc-plum) 70%, var(--ddlc-ink));
+  --text-accent-hover: var(--ddlc-plum);
+  --link-color: var(--text-accent);
+  --link-external-color: var(--text-accent);
+  --bold-color: color-mix(in srgb, var(--ddlc-plum) 70%, var(--ddlc-ink));
+  --italic-color: var(--ddlc-yuri);
+  --list-marker-color: var(--ddlc-plum);
+  --code-background: color-mix(in srgb, var(--ddlc-blush) 60%, var(--ddlc-dot));
+  --code-normal: var(--ddlc-ink);
+  --text-highlight-bg: var(--ddlc-blush);
+  --text-selection: color-mix(in srgb, var(--ddlc-blush) 80%, transparent);
+  --collapse-icon-color: var(--ddlc-plum);
+  color: var(--ddlc-ink);
+}
+
+.theme-dark .callout-icon {
+  color: var(--ddlc-plum);
+}
+
+.callout-title {
+  gap: 0.5em;
+  font-family: var(--ddlc-heading-font);
+}
+
+.callout-title-inner {
+  color: var(--ddlc-paper);
+  font-weight: 400;
+  -webkit-text-stroke: 0.22em var(--ddlc-plum);
+  paint-order: stroke fill;
+  letter-spacing: 0.03em;
+}
+
+/* the properties: a signboard of their own, its foot shaded like the game's
+   name tab; on ink the shade is only partly ink, or it reads as a black seam,
+   and the frame takes the shade so the foot shows two bands, as on paper */
+.theme-light {
+  --ddlc-board: color-mix(in srgb, var(--ddlc-dot) 50%, var(--ddlc-paper));
+  --ddlc-board-frame: var(--ddlc-dot);
+  --ddlc-board-shade: color-mix(in srgb, var(--ddlc-board) 80%, var(--ddlc-jacket));
+  --ddlc-board-drop: var(--ddlc-blush);
+}
+
+.theme-dark {
+  --ddlc-board: color-mix(in srgb, var(--ddlc-yuri) 30%, var(--ddlc-ink));
+  --ddlc-board-frame: var(--ddlc-board-shade);
+  --ddlc-board-shade: color-mix(in srgb, var(--ddlc-board) 60%, var(--ddlc-ink));
+  --ddlc-board-drop: var(--ddlc-blush);
+}
+
+.metadata-container {
+  padding: 0.6em 1em 0.9em;
+  border: 3px solid var(--ddlc-board-frame);
+  border-radius: var(--radius-m);
+  background-color: var(--ddlc-board);
+  box-shadow: inset 0 -4px 0 var(--ddlc-board-shade), 4px 4px 0 var(--ddlc-board-drop);
+}
+
+.metadata-properties-heading {
+  font-family: var(--ddlc-heading-font);
+  color: var(--ddlc-accent);
+}
+
+/* the quote: a note taped onto the sheet, cut from the properties' board, with
+   a strip of translucent tape across its top edge, clear of the text. In Live
+   Preview a quote is one line per row, so the tape goes on the row that follows
+   a non-quote row */
+.theme-light {
+  --ddlc-tape: color-mix(in srgb, var(--ddlc-blush) 70%, transparent);
+}
+
+.theme-dark {
+  --ddlc-tape: color-mix(in srgb, var(--ddlc-pink) 60%, transparent);
+}
+
+.markdown-rendered blockquote {
+  position: relative;
+  margin-top: 1.4em;
+  padding: 0.8em 1.2em;
+  border: 2px solid var(--ddlc-board-frame);
+  border-radius: var(--radius-s);
+  background-color: var(--ddlc-board);
+}
+
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-quote {
+  position: relative;
+  background-color: var(--ddlc-board);
+}
+
+/* Obsidian draws a Live Preview quote's bar as each row's ::before; the note
+   has tape instead */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-quote::before {
+  border: none;
+}
+
+.markdown-rendered blockquote::before,
+.markdown-source-view.mod-cm6 .cm-line:not(.HyperMD-quote) + .cm-line.HyperMD-quote::before {
+  content: "";
+  position: absolute;
+  left: 1.2em;
+  top: -0.7em;
+  width: 4em;
+  height: 1.2em;
+  border: none;
+  background-color: var(--ddlc-tape);
+  transform: rotate(-3deg);
+  pointer-events: none;
+}
+
+/* A code block is a small kitty window opened over the note: the same base16 slots the
+   kitty theme gives its ground, text, selection and tab bar, dark on both sides, with the
+   code painted in the groups ddlc.nvim uses. Obsidian has one punctuation colour where
+   ddlc.nvim splits brackets from delimiters, and brackets are most of it, so it takes
+   theirs. The variables are set on the block alone, so inline code keeps the sheet's own
+   colours. The window is square, as a tiled kitty window is; its title bar carries a
+   prompt, the block's language and one round control that copies.
+   Every size here is in the code's own em, so the bar, the label and the control keep
+   their proportion to the code at any font size */
+body {
+  --ddlc-bar-h: 2.4em;
+  --ddlc-bar-gap: 0.75em;
+  --ddlc-control: 1.65em;
+  --ddlc-control-icon: 1.05em;
+  --ddlc-code-inset: var(--size-4-4);
+}
+
+.markdown-rendered pre,
+.markdown-source-view.mod-cm6 .HyperMD-codeblock {
+  --code-radius: 0;
+  --code-border-width: 1px;
+  --code-border-color: var(--ddlc-base02);
+  --ddlc-bar: var(--ddlc-base01);
+  --ddlc-title: color-mix(in srgb, var(--ddlc-base05) 80%, var(--ddlc-base01));
+  --ddlc-control-bg: color-mix(in srgb, var(--ddlc-base05) 14%, var(--ddlc-base01));
+  --ddlc-control-bg-hover: color-mix(in srgb, var(--ddlc-base05) 28%, var(--ddlc-base01));
+  --text-success: var(--ddlc-base0B);
+  --code-background: var(--ddlc-base00);
+  --code-normal: var(--ddlc-base05);
+  --code-comment: var(--ddlc-base03);
+  --code-keyword: var(--ddlc-base0E);
+  --code-string: var(--ddlc-base0B);
+  --code-function: var(--ddlc-base0D);
+  --code-value: var(--ddlc-base09);
+  --code-tag: var(--ddlc-base0A);
+  --code-property: var(--ddlc-base05);
+  --code-punctuation: var(--ddlc-base05);
+  --code-operator: var(--ddlc-base05);
+  --code-important: var(--ddlc-base08);
+  --text-selection: var(--ddlc-base02);
+}
+
+.markdown-rendered pre .token.comment,
+.markdown-source-view.mod-cm6 .HyperMD-codeblock .cm-comment {
+  font-style: italic;
+}
+
+/* The window: the bar is painted as the top band of the window's own ground, so it needs
+   no element of its own. Live Preview always ends a block with the fence's empty row, so
+   the reading view keeps one line free under the code as well. The drop is the one the
+   properties board casts, so everything that lies on the sheet throws the same shadow.
+   The block takes the code's face and size and the code inherits them, as a Live Preview
+   row has them, so an em or a ch is the same length in both views */
+.markdown-rendered pre {
+  padding: calc(var(--ddlc-bar-h) + var(--ddlc-bar-gap)) var(--ddlc-code-inset) 1lh;
+  font-family: var(--font-monospace);
+  font-size: var(--code-size);
+  background:
+    linear-gradient(var(--ddlc-bar), var(--ddlc-bar)) top / 100% var(--ddlc-bar-h) no-repeat,
+    var(--code-background);
+  box-shadow: 4px 4px 0 var(--ddlc-board-drop);
+}
+
+.markdown-rendered pre code {
+  font-size: inherit;
+}
+
+/* The prompt and the label share one line box the bar's height tall, so they share a
+   baseline; the prompt stands where the code's first column starts */
+.markdown-rendered pre::after,
+.markdown-rendered pre[class]:not([class*=" "])::before {
+  position: absolute;
+  top: 0;
+  height: var(--ddlc-bar-h);
+  line-height: var(--ddlc-bar-h);
+  font-family: var(--font-monospace);
+  white-space: nowrap;
+}
+
+.markdown-rendered pre::after {
+  content: ">";
+  left: var(--ddlc-code-inset);
+  color: var(--ddlc-base0E);
+}
+
+/* The class reads "language-<key>", and CSS cannot cut a prefix off an attribute, so the
+   label prints the whole class in a monospace face, indents it back by the nine characters
+   of "language-", and clips what crosses its padding edge. A class without that prefix is
+   printed whole, so a change in Obsidian's markup shows up as a longer label rather than
+   a missing one. A class of several words has no single name to show, so the bar keeps
+   the prompt alone. With no padding and no ground of its own, the label is plain text on
+   the bar */
+.markdown-rendered pre[class]:not([class*=" "])::before {
+  content: attr(class);
+  left: calc(var(--ddlc-code-inset) + 2ch);
+  overflow: hidden;
+  color: var(--ddlc-title);
+}
+
+.markdown-rendered pre[class^="language-"]::before {
+  text-indent: -9ch;
+}
+
+/* The control. Obsidian shows the copy button on hover only, through a rule of this same
+   weight; the bar keeps it in view, as a window keeps its controls. The button takes the
+   code's size, not the interface's smaller one, so its em is the bar's em. It sits as far
+   from the right edge as from the bar's top and bottom */
+.markdown-rendered pre > button.copy-code-button,
+.markdown-rendered pre:not(:hover) > button.copy-code-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: calc((var(--ddlc-bar-h) - var(--ddlc-control)) / 2);
+  right: calc((var(--ddlc-bar-h) - var(--ddlc-control)) / 2);
+  width: var(--ddlc-control);
+  height: var(--ddlc-control);
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  font-size: inherit;
+  background-color: var(--ddlc-control-bg);
+  color: var(--ddlc-title);
+  box-shadow: none;
+}
+
+.markdown-rendered pre > button.copy-code-button:hover {
+  background-color: var(--ddlc-control-bg-hover);
+  color: var(--ddlc-base07);
+}
+
+.markdown-rendered pre > button.copy-code-button:active {
+  background-color: var(--ddlc-base0E);
+  color: var(--ddlc-base00);
+}
+
+.markdown-rendered pre > button.copy-code-button svg {
+  width: var(--ddlc-control-icon);
+  height: var(--ddlc-control-icon);
+}
+
+/* Live Preview: the fence's first row is the bar. The row cannot take a margin, so its
+   padding makes it the bar's height plus the gap, and only the top band is painted as the
+   bar; the fence's text, shown while the cursor is in it, sits centred in that band */
+.markdown-source-view.mod-cm6 .HyperMD-codeblock-begin {
+  position: relative;
+  padding-top: calc((var(--ddlc-bar-h) - 1lh) / 2);
+  padding-bottom: calc((var(--ddlc-bar-h) - 1lh) / 2 + var(--ddlc-bar-gap));
+  background-image: linear-gradient(var(--ddlc-bar), var(--ddlc-bar));
+  background-size: 100% var(--ddlc-bar-h);
+  background-repeat: no-repeat;
+}
+
+/* The drop shadow, row by row: each row's shadow is covered by the next row, so only the
+   right edge and the last row's foot show, as under the reading view's block.
+   The editor draws the browser's own caret, and both caret properties inherit, so the
+   rows can give it the terminal's block cursor in the terminal's text colour; the sheet's
+   ink caret would vanish on the window's ink ground. The browser paints the block over
+   the letter instead of inverting it, so the block is translucent and the letter shows */
+.markdown-source-view.mod-cm6 .HyperMD-codeblock {
+  box-shadow: 4px 4px 0 var(--ddlc-board-drop);
+  caret-color: color-mix(in srgb, var(--ddlc-base05) 65%, transparent);
+  caret-shape: block;
+}
+
+/* While the cursor is in the block, the bar shows the raw fence instead of the flair; it
+   steps past the prompt, so the bar reads as a prompt with the fence typed after it */
+.markdown-source-view.mod-cm6 .HyperMD-codeblock-begin .cm-formatting-code-block {
+  padding-left: 2ch;
+  color: var(--ddlc-title);
+}
+
+/* The prompt sits on the row, so a block without a language keeps it alone. Obsidian's
+   flair names the language and copies the block when clicked; it spans the bar from the
+   label to the right edge, and the round control is drawn by its own pseudo-elements so a
+   click on the control lands on the flair */
+.markdown-source-view.mod-cm6 .HyperMD-codeblock-begin::before,
+.markdown-source-view.mod-cm6 .code-block-flair {
+  position: absolute;
+  top: 0;
+  height: var(--ddlc-bar-h);
+  line-height: var(--ddlc-bar-h);
+  font-family: var(--font-monospace);
+}
+
+.markdown-source-view.mod-cm6 .HyperMD-codeblock-begin::before {
+  content: ">";
+  left: var(--ddlc-code-inset);
+  color: var(--ddlc-base0E);
+}
+
+.markdown-source-view.mod-cm6 .code-block-flair {
+  left: calc(var(--ddlc-code-inset) + 2ch);
+  right: 0;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-size: inherit;
+  text-transform: lowercase;
+  color: var(--ddlc-title);
+}
+
+/* a block without a language gets Obsidian's own copy icon in the flair; the round
+   control already carries one */
+.markdown-source-view.mod-cm6 .code-block-flair svg {
+  display: none;
+}
+
+.markdown-source-view.mod-cm6 .code-block-flair::before,
+.markdown-source-view.mod-cm6 .code-block-flair::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.markdown-source-view.mod-cm6 .code-block-flair::before {
+  right: calc((var(--ddlc-bar-h) - var(--ddlc-control)) / 2);
+  width: var(--ddlc-control);
+  height: var(--ddlc-control);
+  border-radius: 50%;
+  background-color: var(--ddlc-control-bg);
+}
+
+.markdown-source-view.mod-cm6 .code-block-flair::after {
+  right: calc((var(--ddlc-bar-h) - var(--ddlc-control-icon)) / 2);
+  width: var(--ddlc-control-icon);
+  height: var(--ddlc-control-icon);
+  background-color: var(--ddlc-title);
+  -webkit-mask: var(--ddlc-icon-copy) center / contain no-repeat;
+  mask: var(--ddlc-icon-copy) center / contain no-repeat;
+}
+
+/* Obsidian lights the whole flair on hover; here only the control answers */
+.markdown-source-view.mod-cm6 .code-block-flair:hover {
+  background-color: transparent;
+}
+
+.markdown-source-view.mod-cm6 .code-block-flair:hover::before {
+  background-color: var(--ddlc-control-bg-hover);
+}
+
+.markdown-source-view.mod-cm6 .code-block-flair:hover::after {
+  background-color: var(--ddlc-base07);
+}
+
+.markdown-source-view.mod-cm6 .code-block-flair:active::before {
+  background-color: var(--ddlc-base0E);
+}
+
+.markdown-source-view.mod-cm6 .code-block-flair:active::after {
+  background-color: var(--ddlc-base00);
+}
+
+/* Task states beyond done and open, the set most themes share. Each state names an
+   icon and a colour; one rule draws every state's box as that icon in that colour,
+   and a state is not struck through the way a done task is */
+li[data-task="-"], .HyperMD-task-line[data-task="-"] { --ddlc-task-icon: var(--ddlc-icon-minus); --ddlc-task-color: var(--text-faint); }
+li[data-task=">"], .HyperMD-task-line[data-task=">"] { --ddlc-task-icon: var(--ddlc-icon-forward); --ddlc-task-color: var(--ddlc-jacket); }
+li[data-task="<"], .HyperMD-task-line[data-task="<"] { --ddlc-task-icon: var(--ddlc-icon-calendar); --ddlc-task-color: var(--ddlc-jacket); }
+li[data-task="?"], .HyperMD-task-line[data-task="?"] { --ddlc-task-icon: var(--ddlc-icon-circle-question-mark); --ddlc-task-color: var(--ddlc-accent); }
+li[data-task="!"], .HyperMD-task-line[data-task="!"] { --ddlc-task-icon: var(--ddlc-icon-triangle-alert); --ddlc-task-color: var(--ddlc-bow); }
+li[data-task="*"], .HyperMD-task-line[data-task="*"] { --ddlc-task-icon: var(--ddlc-icon-star); --ddlc-task-color: var(--ddlc-monika); }
+li[data-task='"'], .HyperMD-task-line[data-task='"'] { --ddlc-task-icon: var(--ddlc-icon-quote); --ddlc-task-color: var(--ddlc-jacket); }
+li[data-task="l"], .HyperMD-task-line[data-task="l"] { --ddlc-task-icon: var(--ddlc-icon-map-pin); --ddlc-task-color: var(--ddlc-bow); }
+li[data-task="b"], .HyperMD-task-line[data-task="b"] { --ddlc-task-icon: var(--ddlc-icon-bookmark); --ddlc-task-color: var(--ddlc-sayori); }
+li[data-task="i"], .HyperMD-task-line[data-task="i"] { --ddlc-task-icon: var(--ddlc-icon-info); --ddlc-task-color: var(--ddlc-rule); }
+li[data-task="S"], .HyperMD-task-line[data-task="S"] { --ddlc-task-icon: var(--ddlc-icon-piggy-bank); --ddlc-task-color: var(--ddlc-monika-eye); }
+li[data-task="I"], .HyperMD-task-line[data-task="I"] { --ddlc-task-icon: var(--ddlc-icon-lightbulb); --ddlc-task-color: var(--ddlc-monika); }
+li[data-task="p"], .HyperMD-task-line[data-task="p"] { --ddlc-task-icon: var(--ddlc-icon-thumbs-up); --ddlc-task-color: var(--ddlc-monika-eye); }
+li[data-task="c"], .HyperMD-task-line[data-task="c"] { --ddlc-task-icon: var(--ddlc-icon-thumbs-down); --ddlc-task-color: var(--ddlc-bow); }
+li[data-task="f"], .HyperMD-task-line[data-task="f"] { --ddlc-task-icon: var(--ddlc-icon-flame); --ddlc-task-color: var(--ddlc-bow); }
+li[data-task="k"], .HyperMD-task-line[data-task="k"] { --ddlc-task-icon: var(--ddlc-icon-key); --ddlc-task-color: var(--ddlc-monika); }
+li[data-task="w"], .HyperMD-task-line[data-task="w"] { --ddlc-task-icon: var(--ddlc-icon-trophy); --ddlc-task-color: var(--ddlc-yuri); }
+li[data-task="u"], .HyperMD-task-line[data-task="u"] { --ddlc-task-icon: var(--ddlc-icon-trending-up); --ddlc-task-color: var(--ddlc-monika-eye); }
+li[data-task="d"], .HyperMD-task-line[data-task="d"] { --ddlc-task-icon: var(--ddlc-icon-trending-down); --ddlc-task-color: var(--ddlc-bow); }
+
+:is(li, .HyperMD-task-line):is([data-task="-"], [data-task=">"], [data-task="<"], [data-task="?"], [data-task="!"], [data-task="*"], [data-task='"'], [data-task="l"], [data-task="b"], [data-task="i"], [data-task="S"], [data-task="I"], [data-task="p"], [data-task="c"], [data-task="f"], [data-task="k"], [data-task="w"], [data-task="u"], [data-task="d"]) .task-list-item-checkbox:checked {
+  border: none;
+  background-color: transparent;
+}
+
+:is(li, .HyperMD-task-line):is([data-task="-"], [data-task=">"], [data-task="<"], [data-task="?"], [data-task="!"], [data-task="*"], [data-task='"'], [data-task="l"], [data-task="b"], [data-task="i"], [data-task="S"], [data-task="I"], [data-task="p"], [data-task="c"], [data-task="f"], [data-task="k"], [data-task="w"], [data-task="u"], [data-task="d"]) .task-list-item-checkbox:checked::after {
+  inset: 0;
+  width: auto;
+  height: auto;
+  background-color: var(--ddlc-task-color);
+  -webkit-mask: var(--ddlc-task-icon) center / contain no-repeat;
+  mask: var(--ddlc-task-icon) center / contain no-repeat;
+}
+
+/* half done: the box filled to its middle */
+li[data-task="/"] .task-list-item-checkbox:checked,
+.HyperMD-task-line[data-task="/"] .task-list-item-checkbox:checked {
+  background: linear-gradient(90deg, var(--ddlc-accent) 50%, transparent 50%);
+  border-color: var(--ddlc-accent);
+}
+
+li[data-task="/"] .task-list-item-checkbox:checked::after,
+.HyperMD-task-line[data-task="/"] .task-list-item-checkbox:checked::after {
+  display: none;
+}
+
+/* only a done task is struck through; a cancelled one is struck and faint */
+.markdown-rendered li.task-list-item.is-checked:not([data-task="x"]):not([data-task="X"]),
+.markdown-source-view.mod-cm6 .HyperMD-task-line[data-task]:not([data-task="x"]):not([data-task="X"]) {
+  text-decoration: none;
+  color: var(--text-normal);
+}
+
+.markdown-rendered li.task-list-item[data-task="-"],
+.markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="-"] {
+  text-decoration: line-through;
+  color: var(--text-faint);
+}
+
+/* the choice buttons */
+button.mod-cta {
+  border-radius: var(--radius-m);
+  box-shadow: 0 0 0 2px var(--ddlc-paper), 0 0 0 4px var(--ddlc-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workspace-leaf-content[data-type="markdown"] .view-content::before {
+    animation: none;
+  }
+}

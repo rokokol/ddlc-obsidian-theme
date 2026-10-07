@@ -1,0 +1,4 @@
+# Built by generate.sh; a release carries the one built from its own tag
+/theme.css
+# nix build output
+/result

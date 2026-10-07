@@ -1,0 +1,35 @@
+# Files vendored from other repositories and kept byte-equal to their source by
+# vendor-sync.sh, one per line: LOCAL OWNER/REPO PATH COMMIT BLOB [manual]. Never edit a
+# copy in place: change it at its source and let the weekly cascade bring it back. How it
+# works: references/bump-cascade.md in https://github.com/rokokol/ci-skill
+vendor-sync.sh rokokol/ci-skill templates/vendor-sync.sh 3c695514d0a0723fde9f49ec3d857da9c803c0ad 176a58470c142a98cb6434a889b3e98fea266ad3
+vendor/palette.css rokokol/ddlc-palette dist/palette.css f83687139665905790ea1caf2fc2760d26d2f0d5 4bd7aa6bf53c0f115a833bd350a6512c43acc5bf
+vendor/base16-ddlc-dark.yaml rokokol/ddlc-palette dist/base16-ddlc-dark.yaml f83687139665905790ea1caf2fc2760d26d2f0d5 767869749fe2f190fbbf83e20733a28d5cccb870
+vendor/lucide/minus.svg lucide-icons/lucide icons/minus.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 75093e27c20965c9e37fb9dcef9f939746c67578
+vendor/lucide/forward.svg lucide-icons/lucide icons/forward.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 ed78b022b936774f669dbe163b2e80da0e74dcb4
+vendor/lucide/calendar.svg lucide-icons/lucide icons/calendar.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 4679497031a9540a311f6223da003ce26f638e24
+vendor/lucide/triangle-alert.svg lucide-icons/lucide icons/triangle-alert.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 3232fb062dc26463279016cd7483677de9ef9bbd
+vendor/lucide/star.svg lucide-icons/lucide icons/star.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 b35bedd29fe765b729b3cd790e98574c4afde4c0
+vendor/lucide/quote.svg lucide-icons/lucide icons/quote.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 24e793a0b0c62339bfef1da069b97e6b004302fc
+vendor/lucide/map-pin.svg lucide-icons/lucide icons/map-pin.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 5d73fbd48b1e663493efaa4523b6c105f996146b
+vendor/lucide/bookmark.svg lucide-icons/lucide icons/bookmark.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 f0112a912801351a525cbceacf60eb774b42fd74
+vendor/lucide/info.svg lucide-icons/lucide icons/info.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 2a46eac2b55a1ead226035d1efa8721f6f08bd17
+vendor/lucide/piggy-bank.svg lucide-icons/lucide icons/piggy-bank.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 a4e6700bac6be8ef3d52f8cf84320fc3dbe686c4
+vendor/lucide/lightbulb.svg lucide-icons/lucide icons/lightbulb.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 3f4e40913a27ed3362721dc71aef68be66757b6a
+vendor/lucide/thumbs-up.svg lucide-icons/lucide icons/thumbs-up.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 573950cd883ef162177694db0b6b3138254b7e74
+vendor/lucide/thumbs-down.svg lucide-icons/lucide icons/thumbs-down.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 870a96acc798106767d7202c8d8469b74e837256
+vendor/lucide/flame.svg lucide-icons/lucide icons/flame.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 9a774916838c22983fc1db6a055612c907c953d5
+vendor/lucide/key.svg lucide-icons/lucide icons/key.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 e9e4eab5a61c49b05af3c361abd20e623e8d0535
+vendor/lucide/trophy.svg lucide-icons/lucide icons/trophy.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 8e97a429e047c98ad8ae35eab93dc9935c841334
+vendor/lucide/trending-up.svg lucide-icons/lucide icons/trending-up.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 2ff1fb20265edb386d781dfa742e1d16a124c798
+vendor/lucide/trending-down.svg lucide-icons/lucide icons/trending-down.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 2ec045a07053474948f660e3f9ae969a415f23de
+vendor/lucide/copy.svg lucide-icons/lucide icons/copy.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 f62ce99c1f34989a5f70cd15192f8adf9140f4ed
+vendor/lucide/circle-question-mark.svg lucide-icons/lucide icons/circle-question-mark.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 cf7e6efe84c4ff48cc150cccd1e7a0f2aabf3402
+check-pins.sh rokokol/ci-skill templates/check-pins.sh 3c695514d0a0723fde9f49ec3d857da9c803c0ad c86f8288606d532f7982206eea8e8a310315d7f6
+check-sh.sh rokokol/bash-best-practices-skill check-sh.sh a4f5f26191417564d0ebe122bf652dd7e3f74b50 37cb4b54dc245288c711b9665c9b4aedc496b1ce
+.github/workflows/vendor-sync.yml rokokol/ci-skill templates/github/workflows/vendor-sync.yml 3c695514d0a0723fde9f49ec3d857da9c803c0ad a5bde77f98d55a43b2c993f4c96a952e0b68010d manual
+.github/workflows/macos.yml rokokol/bash-best-practices-skill templates/github/workflows/macos.yml a4f5f26191417564d0ebe122bf652dd7e3f74b50 aa7a3b768209f56c3afa78a4fb9d0ed560d4c678 manual
+check-nix.sh rokokol/nix-best-practices-skill check-nix.sh bb5c1614c27476b43d962da6380b2021595e5537 174eead973a39475c5204fbe5771c5c746b64224
+check-changelog.sh rokokol/versioning-skill check-changelog.sh b13ab46e2fb6dc6800b799b720849e02143ff345 103e3395a394fe6d39b8d7e0989107d9aa01c2e8
+vendor/lucide/LICENSE lucide-icons/lucide LICENSE b56741cf30c08fc7248bf41ddd3a261367aa9579 718bb3f0e44153809972abed31839375804bf652
+check-prose.sh rokokol/create-readme-skill check-prose.sh 59431b7ecacf8d16cf7750583ffa53b1154d1676 3054ffa2de0990be2164494d734f34f17eda5e2b

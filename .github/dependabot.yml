@@ -1,0 +1,8 @@
+# The pinned actions in .github/workflows go stale silently: nothing in CI notices a major
+# that has moved on
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
