@@ -15,7 +15,7 @@
 
 ![the theme light above the diagonal and dark below it, with chibi Monika in the corner](docs/cover.png)
 
-The theme is called **DDLC** inside Obsidian. Its colours come from [ddlc-palette](https://github.com/rokokol/ddlc-palette), the same palette as [ddlc-themes](https://github.com/rokokol/ddlc-themes) for kitty, btop and the rest, and [ddlc.nvim](https://github.com/rokokol/ddlc.nvim)
+The theme is called **DDLC** inside Obsidian. Its colours come from [ddlc-palette](https://github.com/rokokol/ddlc-palette) parsed from ddlc.moe, the same palette as [ddlc-themes](https://github.com/rokokol/ddlc-themes) for kitty, btop and the rest, and [ddlc.nvim](https://github.com/rokokol/ddlc.nvim)
 
 | ![the theme, light variant](docs/light.png) | ![the theme, dark variant](docs/dark.png) |
 | ------------------------------------------- | ----------------------------------------- |
@@ -38,6 +38,20 @@ Headings use the game's `Doki` font where it is installed; the theme does not sh
 ## Install
 
 Download `theme.css` and `manifest.json` from the [latest release](https://github.com/rokokol/ddlc-obsidian-theme/releases/latest) into `.obsidian/themes/DDLC/` inside your vault, then pick **DDLC** under **Settings → Appearance → Themes**
+
+## The club on an empty tab
+
+![Sayori, Monika, Natsuki and Yuri walking along the foot of an empty tab](docs/dokis.jpg)
+
+An optional snippet puts the four girls at the foot of every empty tab, as on the [ddlc-sddm-theme](https://github.com/rokokol/ddlc-sddm-theme) login screen. They walk to and fro, hop now and then, and hop when the cursor touches them
+
+To turn it on, download `ddlc-stickers.css` from the same [release](https://github.com/rokokol/ddlc-obsidian-theme/releases/latest) into `.obsidian/snippets/` inside your vault, then enable it under **Settings → Appearance → CSS snippets**. It works with the DDLC theme and with any other
+
+It is a snippet and not a part of the theme for these reasons:
+
+- The stickers are Team Salvato's artwork, while the theme itself draws everything in CSS and carries no official image. Keeping them apart lets the theme in the community directory stay free of game assets, and lets you choose whether you want them, see [ASSETS.md](ASSETS.md)
+- The girls move all the time, and not everybody wants motion on an empty tab
+- The pictures are embedded in the file, so the snippet is several times larger than the theme
 
 ## Build
 

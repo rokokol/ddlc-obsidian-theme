@@ -1,0 +1,229 @@
+/* The club walks along the foot of an empty tab by the rules of the ddlc-sddm-theme login
+   screen, read from its SpriteRow.qml and CharacterSprite.qml. The comments say which rule
+   each part follows.
+   Every frame is a 141x173 canvas with the girl at its bottom, so a girl keeps her height
+   and her feet when she changes pose. The login screen draws the canvas 1:1, and so does
+   this snippet while the tab is wide enough. A narrower tab scales the canvas down to fit
+   the band, because the login screen lets its row run off the screen there */
+
+/* SpriteRow keeps the corner buttons clear with a side reserve, and stands the row
+   above the buttons at the bottom. An empty tab has no corner buttons, so the side
+   reserve is zero, and the row stands on the tab's bottom edge. The status bar floats
+   over the rightmost tab in a layer above it, so the girls walk under the bar */
+.empty-state {
+  overflow: hidden;
+  container-type: inline-size;
+  --ddlc-side-reserve: 0px;
+  --ddlc-band: calc((100cqw - 2 * var(--ddlc-side-reserve)) / 4);
+  /* SpriteRow makes a band at least as wide as the canvas is tall. Here a narrower band
+     scales the canvas instead */
+  --ddlc-k: calc(min(173px, var(--ddlc-band)) / 173px);
+}
+
+/* A girl hops when the cursor enters her. A pseudo-element is hovered as part of the
+   element it belongs to, so each girl needs an element of her own that nothing else
+   hovers. The four hosts are the empty state, its container, its button list and its
+   title. Their own boxes let the pointer through, and everything inside them still
+   takes it, so a host is hovered by itself only through its girl */
+.empty-state * {
+  pointer-events: auto;
+}
+
+.empty-state,
+.empty-state-container,
+.empty-state-action-list,
+.empty-state-title {
+  pointer-events: none;
+}
+
+/* The title would otherwise hold its girl, who must stand in the empty state */
+.empty-state-title {
+  position: static;
+}
+
+/* The row order is Sayori, Monika, Natsuki, Yuri. Each girl walks from 10px inside her
+   band to 10px short of its end, then back. One leg takes 4.8s plus 1.1s per place in
+   the row. All of them start at the left end, walking right.
+   The box is 42px taller than the canvas, so a hop moves the picture and not the box.
+   A girl then stays under the cursor while she hops for it */
+.empty-state::before,
+.empty-state-container::before,
+.empty-state-action-list::before,
+.empty-state-title::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: calc(var(--ddlc-side-reserve) + var(--ddlc-i) * var(--ddlc-band) + 10px * var(--ddlc-k));
+  width: calc(141px * var(--ddlc-k));
+  height: calc(215px * var(--ddlc-k));
+  --ddlc-walk: max(10px * var(--ddlc-k), var(--ddlc-band) - 161px * var(--ddlc-k));
+  --ddlc-leg: calc(4.8s + var(--ddlc-i) * 1.1s);
+  --ddlc-frame: var(--ddlc-calm);
+  background-image: var(--ddlc-frame);
+  background-size: calc(141px * var(--ddlc-k)) calc(173px * var(--ddlc-k));
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  pointer-events: auto;
+  animation:
+    ddlc-drift calc(2 * var(--ddlc-leg)) infinite,
+    ddlc-face calc(2 * var(--ddlc-leg)) step-end infinite,
+    ddlc-hop 42s var(--ddlc-hop-at) infinite,
+    ddlc-pose 42s step-end var(--ddlc-hop-at) infinite;
+}
+
+/* The login screen also hops a random girl every 6 to 15 seconds. CSS has no random, so
+   each girl hops once in a 42s round, at a fixed moment. The gaps between hops are 11.5s,
+   8s, 7.5s and 15s. They stay in that range, average its 10.5s, and never overlap */
+.empty-state::before {
+  --ddlc-i: 0;
+  --ddlc-calm: var(--ddlc-sayori-sticker-calm);
+  --ddlc-excited: var(--ddlc-sayori-sticker-excited);
+  --ddlc-hop-at: 17.5s;
+}
+
+.empty-state-container::before {
+  --ddlc-i: 1;
+  --ddlc-calm: var(--ddlc-monika-sticker-calm);
+  --ddlc-excited: var(--ddlc-monika-sticker-excited);
+  --ddlc-hop-at: 33s;
+}
+
+.empty-state-action-list::before {
+  --ddlc-i: 2;
+  --ddlc-calm: var(--ddlc-natsuki-sticker-calm);
+  --ddlc-excited: var(--ddlc-natsuki-sticker-excited);
+  --ddlc-hop-at: 6s;
+}
+
+.empty-state-title::before {
+  --ddlc-i: 3;
+  --ddlc-calm: var(--ddlc-yuri-sticker-calm);
+  --ddlc-excited: var(--ddlc-yuri-sticker-excited);
+  --ddlc-hop-at: 25.5s;
+}
+
+/* A host hovered with none of its children hovered means its girl is under the cursor.
+   She is excited while the cursor stays. The walk changes layout, so Chromium moves the
+   hover when she walks away from a cursor that stands still */
+.empty-state:hover:not(:has(:hover))::before,
+.empty-state-container:hover:not(:has(:hover))::before,
+.empty-state-action-list:hover:not(:has(:hover))::before,
+.empty-state-title:hover:not(:has(:hover))::before {
+  background-image: var(--ddlc-excited);
+}
+
+/* She hops as the cursor enters, and finishes the hop when it leaves early. A hover
+   rule alone would drop the hop the moment the cursor leaves. So the host holds a
+   latch: it sets at once on hover and clears 670ms after the cursor goes, through a
+   delayed transition. The hop runs while the latch is set, and starts only when it
+   sets, so entering again during a hop does not restart it, as on the login screen */
+@property --ddlc-latch {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.empty-state,
+.empty-state-container,
+.empty-state-action-list,
+.empty-state-title {
+  transition: --ddlc-latch 0s linear 670ms;
+}
+
+.empty-state:hover:not(:has(:hover)),
+.empty-state-container:hover:not(:has(:hover)),
+.empty-state-action-list:hover:not(:has(:hover)),
+.empty-state-title:hover:not(:has(:hover)) {
+  --ddlc-latch: 1;
+  transition-delay: 0s;
+}
+
+/* A pseudo-element queries the element it belongs to. The other animations keep their
+   places in the list, so they run on undisturbed */
+@container style(--ddlc-latch: 1) {
+  .empty-state::before,
+  .empty-state-container::before,
+  .empty-state-action-list::before,
+  .empty-state-title::before {
+    animation:
+      ddlc-drift calc(2 * var(--ddlc-leg)) infinite,
+      ddlc-face calc(2 * var(--ddlc-leg)) step-end infinite,
+      ddlc-hop 42s var(--ddlc-hop-at) infinite,
+      ddlc-pose 42s step-end var(--ddlc-hop-at) infinite,
+      ddlc-jump 670ms;
+  }
+}
+
+/* Each leg eases in and out like a sine. This curve stays within 0.03% of InOutSine.
+   The walk moves margin-left and not translate, so every frame reads the band's width
+   as it is now. A translate can run on the compositor, which keeps the lengths it took
+   when the animation started, so a resized tab could leave a girl on her old path
+   until a hover or a hop made her jump to the new one */
+@keyframes ddlc-drift {
+  0% {
+    margin-left: 0;
+    animation-timing-function: cubic-bezier(0.3642, 0, 0.6358, 1);
+  }
+  50% {
+    margin-left: var(--ddlc-walk);
+    animation-timing-function: cubic-bezier(0.3642, 0, 0.6358, 1);
+  }
+  100% { margin-left: 0; }
+}
+
+/* The stickers face left, so a girl is mirrored exactly while she walks right */
+@keyframes ddlc-face {
+  0% { scale: -1 1; }
+  50%, 100% { scale: 1 1; }
+}
+
+/* A hop takes 670ms. It rises 42px in 190ms with OutQuad, which this curve draws
+   exactly. It falls back in 480ms with OutBounce, sampled along its arcs. The idle hop
+   lives in a 42s round, so its keyframes sit at 0.4524% and 1.5952% of it */
+@keyframes ddlc-hop {
+  0% {
+    background-position-y: bottom 0px;
+    animation-timing-function: cubic-bezier(0.3333, 0.6667, 0.6667, 1);
+  }
+  0.4524% {
+    background-position-y: bottom calc(42px * var(--ddlc-k));
+    animation-timing-function: linear(0, 0.01 3.64%, 0.04 7.27%, 0.09 10.91%, 0.16 14.55%, 0.25 18.18%, 0.36 21.82%, 0.49 25.45%, 0.64 29.09%, 0.81 32.73%, 1 36.36%, 0.8906 40.91%, 0.8125 45.45%, 0.7656 50%, 0.75 54.55%, 0.7656 59.09%, 0.8125 63.64%, 0.8906 68.18%, 1 72.73%, 0.9531 77.27%, 0.9375 81.82%, 0.9531 86.36%, 1 90.91%, 0.9844 95.45%, 1);
+  }
+  1.5952%, 100% { background-position-y: bottom 0px; }
+}
+
+/* The same hop on hover, as a whole animation of its own: the rise ends at 190/670.
+   It keeps her excited to the end of a hop the cursor left early */
+@keyframes ddlc-jump {
+  0% {
+    --ddlc-frame: var(--ddlc-excited);
+    background-position-y: bottom 0px;
+    animation-timing-function: cubic-bezier(0.3333, 0.6667, 0.6667, 1);
+  }
+  28.3582% {
+    background-position-y: bottom calc(42px * var(--ddlc-k));
+    animation-timing-function: linear(0, 0.01 3.64%, 0.04 7.27%, 0.09 10.91%, 0.16 14.55%, 0.25 18.18%, 0.36 21.82%, 0.49 25.45%, 0.64 29.09%, 0.81 32.73%, 1 36.36%, 0.8906 40.91%, 0.8125 45.45%, 0.7656 50%, 0.75 54.55%, 0.7656 59.09%, 0.8125 63.64%, 0.8906 68.18%, 1 72.73%, 0.9531 77.27%, 0.9375 81.82%, 0.9531 86.36%, 1 90.91%, 0.9844 95.45%, 1);
+  }
+  100% {
+    --ddlc-frame: var(--ddlc-excited);
+    background-position-y: bottom 0px;
+  }
+}
+
+/* A girl wears her excited pose exactly while she hops by herself. The pose goes
+   through a variable, because Chromium blends two background images while it animates
+   between them, and a variable flips at once. Hovering sets the picture itself, so the
+   animated variable does not override it, and ddlc-jump, later in the list, does */
+@keyframes ddlc-pose {
+  0% { --ddlc-frame: var(--ddlc-excited); }
+  1.5952%, 100% { --ddlc-frame: var(--ddlc-calm); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .empty-state::before,
+  .empty-state-container::before,
+  .empty-state-action-list::before,
+  .empty-state-title::before {
+    animation: none;
+  }
+}

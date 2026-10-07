@@ -90,7 +90,7 @@ check_lint() {
 copy_repo() { # copy_repo NAME -> prints the copy's path
   local dest="$WORK/$1"
   mkdir -p "$dest"
-  cp -R generate.sh src vendor "$dest/"
+  cp -R generate.sh src vendor assets "$dest/"
   printf '%s\n' "$dest"
 }
 
@@ -105,7 +105,7 @@ expect_fail() {
 }
 
 check_behaviour() {
-  local repo built colours slots icons
+  local repo built snippet colours slots icons stickers
   if [[ -n "${CHECK_BASH32:-}" ]]; then
     echo "== this bash is the 3.2 under proof"
     ((BASH_VERSINFO[0] == 3)) || fail "CHECK_BASH32 is set, but this bash is $BASH_VERSION"
@@ -119,8 +119,10 @@ check_behaviour() {
   checker generate.sh >/dev/null
 
   echo "== the theme carries every palette colour, every base16 slot and every icon"
-  built="$WORK/built.css"
-  "$BASH" ./generate.sh build -o "$built"
+  mkdir -p "$WORK/built"
+  "$BASH" ./generate.sh build -o "$WORK/built"
+  built="$WORK/built/theme.css"
+  snippet="$WORK/built/ddlc-stickers.css"
   colours=$(grep -c -- '--ddlc-[a-z-]*: #' vendor/palette.css)
   slots=$(grep -c 'base0[[:xdigit:]]:' vendor/base16-ddlc-dark.yaml)
   icons=$(find vendor/lucide -name '*.svg' | wc -l | tr -d ' ')
@@ -129,6 +131,12 @@ check_behaviour() {
   (($(grep -c -- '--ddlc-icon-[a-z-]*: url(' "$built") == icons)) || fail "the theme lost an icon"
   grep -qF "$(sed -n 1p vendor/lucide/LICENSE)" "$built" || fail "the theme lost the icons' licence notice"
   grep -q 'build-stamp\|#[0-9A-Fa-f]\{6\}' src/ddlc.css && fail "src/ddlc.css holds a literal colour or a stamp"
+
+  echo "== the snippet carries every sticker frame, and the theme carries none"
+  stickers=$(find assets -name '*-sticker-*.png' | wc -l | tr -d ' ')
+  (($(grep -c -- '--ddlc-[a-z]*-sticker-[a-z]*: url("data:image/png;base64,' "$snippet") == stickers)) ||
+    fail "the snippet lost a sticker frame"
+  grep -q 'data:image/png' "$built" && fail "theme.css carries a sticker, which belongs to the snippet alone"
 
   echo "== an untouched copy passes, so every red below is the defect's own"
   repo=$(copy_repo clean)
@@ -159,9 +167,22 @@ check_behaviour() {
   rm -f "$repo/src/ddlc.css"
   expect_fail "a missing template" 1 "missing" "$BASH" "$repo/generate.sh" build
 
+  repo=$(copy_repo short-calm)
+  rm -f "$repo/assets/yuri-sticker-calm.png"
+  expect_fail "a calm frame short" 1 "expected 8 sticker frames" "$BASH" "$repo/generate.sh" build
+
+  repo=$(copy_repo short-excited)
+  rm -f "$repo/assets/natsuki-sticker-excited.png"
+  expect_fail "an excited frame short" 1 "expected 8 sticker frames" "$BASH" "$repo/generate.sh" build
+
+  repo=$(copy_repo no-sticker-template)
+  rm -f "$repo/src/stickers.css"
+  expect_fail "a missing sticker template" 1 "missing" "$BASH" "$repo/generate.sh" build
+
   echo "== a request it cannot serve is a usage error, not a finding"
   expect_fail "an unknown subcommand" 2 "no such subcommand" "$BASH" ./generate.sh bogus
-  expect_fail "-o with no file" 2 "-o needs a file" "$BASH" ./generate.sh build -o
+  expect_fail "-o with no directory" 2 "-o needs a directory" "$BASH" ./generate.sh build -o
+  expect_fail "-o naming no directory" 2 "is not a directory" "$BASH" ./generate.sh build -o "$WORK/not-a-dir"
   expect_fail "build with a stray argument" 2 "unexpected argument" "$BASH" ./generate.sh build extra
 }
 

@@ -1,4 +1,5 @@
-# Built by generate.sh; a release carries the one built from its own tag
+# Built by generate.sh; a release carries the ones built from its own tag
 /theme.css
+/ddlc-stickers.css
 # nix build output
 /result
