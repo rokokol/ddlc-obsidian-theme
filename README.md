@@ -13,6 +13,8 @@
 
 </div>
 
+![the theme light above the diagonal and dark below it, with chibi Monika in the corner](docs/cover.png)
+
 The theme is called **DDLC** inside Obsidian. Its colours come from [ddlc-palette](https://github.com/rokokol/ddlc-palette), the same palette as [ddlc-themes](https://github.com/rokokol/ddlc-themes) for kitty, btop and the rest, and [ddlc.nvim](https://github.com/rokokol/ddlc.nvim)
 
 | ![the theme, light variant](docs/light.png) | ![the theme, dark variant](docs/dark.png) |
@@ -30,6 +32,8 @@ The theme is called **DDLC** inside Obsidian. Its colours come from [ddlc-palett
 - Motion stops when the system asks for reduced motion
 
 Headings use the game's `Doki` font where it is installed; the theme does not ship it, see [ASSETS.md](ASSETS.md)
+
+![live preview mode](docs/live_preview.jpg)
 
 ## Install
 
