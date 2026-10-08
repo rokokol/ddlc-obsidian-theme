@@ -20,7 +20,7 @@
             actionlint
             deadnix
             jq
-            nixfmt-tree
+            nixfmt
             shellcheck
             shfmt
             statix
