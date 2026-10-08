@@ -59,6 +59,9 @@
   --ddlc-walk: max(10px * var(--ddlc-k), var(--ddlc-band) - 161px * var(--ddlc-k));
   --ddlc-leg: calc(4.8s + var(--ddlc-i) * 1.1s);
   --ddlc-frame: var(--ddlc-calm);
+  translate: calc(var(--ddlc-p) * var(--ddlc-walk)) 0;
+  /* not seen; it only asks for the layout pass the hover check needs, see below */
+  margin-left: calc(var(--ddlc-p) * 0.01px);
   background-image: var(--ddlc-frame);
   background-size: calc(141px * var(--ddlc-k)) calc(173px * var(--ddlc-k));
   background-position: center bottom;
@@ -103,8 +106,10 @@
 }
 
 /* A host hovered with none of its children hovered means its girl is under the cursor.
-   She is excited while the cursor stays. The walk changes layout, so Chromium moves the
-   hover when she walks away from a cursor that stands still */
+   She is excited while the cursor stays. Chromium checks what is under a cursor that
+   stands still only after a layout pass, so the walk also moves her margin by a
+   hundredth of a pixel. That is a layout pass every frame, while the picture moves by
+   translate alone */
 .empty-state:hover:not(:has(:hover))::before,
 .empty-state-container:hover:not(:has(:hover))::before,
 .empty-state-action-list:hover:not(:has(:hover))::before,
@@ -155,20 +160,29 @@
 }
 
 /* Each leg eases in and out like a sine. This curve stays within 0.03% of InOutSine.
-   The walk moves margin-left and not translate, so every frame reads the band's width
-   as it is now. A translate can run on the compositor, which keeps the lengths it took
-   when the animation started, so a resized tab could leave a girl on her old path
-   until a hover or a hop made her jump to the new one */
+   The walk animates a registered number from 0 to 1, and the translate multiplies the
+   path by it. A translate animated directly runs on the compositor, which keeps the
+   lengths it took at the start, so a resized tab left a girl on her old path until
+   something restarted it. A number is animated on the main thread, and the path is
+   resolved in the girl's own style, against the tab as it is now.
+   The translate still moves her by fractions of a pixel. A walk by margin-left moved
+   her box, which is painted on whole pixels, so a slow girl moved in jerks */
+@property --ddlc-p {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
 @keyframes ddlc-sticker-walk {
   0% {
-    margin-left: 0;
+    --ddlc-p: 0;
     animation-timing-function: cubic-bezier(0.3642, 0, 0.6358, 1);
   }
   50% {
-    margin-left: var(--ddlc-walk);
+    --ddlc-p: 1;
     animation-timing-function: cubic-bezier(0.3642, 0, 0.6358, 1);
   }
-  100% { margin-left: 0; }
+  100% { --ddlc-p: 0; }
 }
 
 /* The stickers face left, so a girl is mirrored exactly while she walks right */
