@@ -2,7 +2,7 @@
 
 All notable changes to this theme are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the theme uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
-## Unreleased
+## [0.2.0] - 2026-10-08
 
 ### Added
 
@@ -32,5 +32,6 @@ All notable changes to this theme are documented in this file. The format follow
 - Icons for the task states `/ - > < ? ! * " l b i S I p c f k w u d`
 - `ddlc-stickers.css`, an optional snippet in each release: the four club members walk along the foot of an empty tab
 
+[0.2.0]: https://github.com/rokokol/ddlc-obsidian-theme/releases/tag/0.2.0
 [0.1.1]: https://github.com/rokokol/ddlc-obsidian-theme/releases/tag/0.1.1
 [0.1.0]: https://github.com/rokokol/ddlc-obsidian-theme/releases/tag/0.1.0
