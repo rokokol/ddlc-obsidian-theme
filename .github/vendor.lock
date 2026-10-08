@@ -33,3 +33,4 @@ check-nix.sh rokokol/nix-best-practices-skill check-nix.sh bb5c1614c27476b43d962
 check-changelog.sh rokokol/versioning-skill check-changelog.sh b13ab46e2fb6dc6800b799b720849e02143ff345 103e3395a394fe6d39b8d7e0989107d9aa01c2e8
 vendor/lucide/LICENSE lucide-icons/lucide LICENSE b56741cf30c08fc7248bf41ddd3a261367aa9579 718bb3f0e44153809972abed31839375804bf652
 check-prose.sh rokokol/create-readme-skill check-prose.sh 59431b7ecacf8d16cf7750583ffa53b1154d1676 3054ffa2de0990be2164494d734f34f17eda5e2b
+vendor/ddlc-tokens.css rokokol/ddlc-themes dist/ddlc-tokens.css b06ac2320866c090f467f98e510b4e6a15d6d74b 69bcee7fe0507447aacc02062cc98ab53908b9b9

@@ -2,6 +2,13 @@
 
 All notable changes to this theme are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the theme uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [0.3.0] - 2026-10-08
+
+### Changed
+
+- The theme takes its shared colour roles from [ddlc-themes](https://github.com/rokokol/ddlc-themes), so the text, links, borders, the pop-up, the board, the tape and the code window match the DDLC web pages and reports. The theme looks the same, except for the next entry
+- In a code block, the `important` token is pink (`natsuki`) instead of red (`bow`). The red read at 2.8:1 on the window's dark ground
+
 ## [0.2.0] - 2026-10-08
 
 ### Added

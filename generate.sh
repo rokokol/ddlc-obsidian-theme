@@ -13,7 +13,8 @@ set -euo pipefail
 usage() {
   cat <<'EOF'
 generate.sh — render theme.css from the vendored DDLC palette, its dark base16 scheme,
-the vendored Lucide icons and the theme template, and the optional snippets:
+the shared DDLC roles, the vendored Lucide icons and the theme template, and the optional
+snippets:
 ddlc-stickers.css with the club's stickers and ddlc-still.css that stops the background
 
   generate.sh build [-o DIR]   write the three files (default: beside this script)
@@ -38,6 +39,9 @@ die() { # the request itself is wrong
 HERE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 PALETTE="$HERE/vendor/palette.css"
 TEMPLATE="$HERE/src/ddlc.css"
+# The roles every DDLC surface shares, from ddlc-themes: the template maps them onto
+# Obsidian's variables and its own selectors
+TOKENS="$HERE/vendor/ddlc-tokens.css"
 BASE16="$HERE/vendor/base16-ddlc-dark.yaml"
 ICONS="$HERE/vendor/lucide"
 ICON_LICENSE="$ICONS/LICENSE"
@@ -51,6 +55,7 @@ render() {
   local line name hex count=0
   [[ -f "$PALETTE" ]] || fail "missing $PALETTE"
   [[ -f "$TEMPLATE" ]] || fail "missing $TEMPLATE"
+  [[ -f "$TOKENS" ]] || fail "missing $TOKENS"
   [[ -f "$ICON_LICENSE" ]] || fail "missing $ICON_LICENSE"
   # *\/* is a literal */, which would close the notice's comment early
   case "$(cat "$ICON_LICENSE")" in *'*/'*) fail "$ICON_LICENSE holds */ and cannot sit in a comment" ;; esac
@@ -59,7 +64,9 @@ render() {
   printf '/* The task and copy icons are Lucide icons, https://lucide.dev\n\n'
   cat "$ICON_LICENSE"
   printf '*/\n\n'
-  printf 'body {\n'
+  # On the root, not the body: the vendored roles below are declared there and read these
+  # colours, and a var() resolves on the element that declares it
+  printf ':root {\n'
   while IFS= read -r line; do
     case "$line" in
       *--ddlc-*:*'#'*) ;;
@@ -78,6 +85,8 @@ render() {
   render_base16
   render_icons
   printf '}\n\n'
+  cat "$TOKENS"
+  printf '\n'
   cat "$TEMPLATE"
 }
 

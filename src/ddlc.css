@@ -2,7 +2,8 @@
    sheet under the text, callouts as the "Just Monika." pop-up, the outlined
    menu lettering. The dark side is the same club on a violet ink sheet, where
    the pop-up stays pale the way it does over the game's dark screen.
-   Every colour is a --ddlc-* palette token; shades the palette lacks are mixed,
+   Every colour is a --ddlc-* palette colour or one of the roles every DDLC surface
+   shares, vendored from ddlc-themes; a shade only this theme needs is mixed here,
    and a translucent one is a mix with transparent */
 
 body {
@@ -47,73 +48,63 @@ body {
   --color-pink: var(--ddlc-pink);
 }
 
+/* The shared roles come from ddlc-themes as light-dark() pairs, and Obsidian sets the
+   color-scheme that picks a pair's half on .theme-light and .theme-dark itself. The roles
+   the two sides share map onto Obsidian's variables once */
+.theme-light,
+.theme-dark {
+  --background-modifier-border: var(--ddlc-line);
+  --background-modifier-border-hover: var(--ddlc-line-live);
+  --text-normal: var(--ddlc-text);
+  --text-muted: var(--ddlc-muted);
+  --text-faint: var(--ddlc-faint);
+  --text-accent: var(--ddlc-accent);
+  --text-accent-hover: var(--ddlc-accent-live);
+  --text-on-accent: var(--ddlc-on-accent);
+  --text-selection: var(--ddlc-selection);
+  --text-highlight-bg: var(--ddlc-highlight);
+  --table-border-color: var(--ddlc-line);
+}
+
 .theme-light {
-  --ddlc-ground: var(--ddlc-paper);
   --ddlc-dots: var(--ddlc-dot);
-  --ddlc-accent: var(--ddlc-plum);
   --ddlc-outline: var(--ddlc-plum);
-  --ddlc-muted: color-mix(in srgb, var(--ddlc-ink) 55%, var(--ddlc-jacket));
 
   --background-primary: var(--ddlc-paper);
   --background-primary-alt: color-mix(in srgb, var(--ddlc-dot) 45%, var(--ddlc-paper));
   --background-secondary: color-mix(in srgb, var(--ddlc-dot) 35%, var(--ddlc-paper));
   --background-secondary-alt: color-mix(in srgb, var(--ddlc-dot) 60%, var(--ddlc-paper));
-  --background-modifier-border: var(--ddlc-blush);
-  --background-modifier-border-hover: var(--ddlc-pink);
   --background-modifier-border-focus: var(--ddlc-plum);
   --background-modifier-hover: color-mix(in srgb, var(--ddlc-blush) 45%, transparent);
   --background-modifier-active-hover: color-mix(in srgb, var(--ddlc-blush) 70%, transparent);
-  --text-normal: var(--ddlc-ink);
-  --text-muted: var(--ddlc-muted);
-  --text-faint: var(--ddlc-jacket);
-  --text-accent: var(--ddlc-plum);
-  --text-accent-hover: var(--ddlc-pink);
-  --text-on-accent: var(--ddlc-paper);
-  --text-selection: color-mix(in srgb, var(--ddlc-blush) 80%, transparent);
-  --text-highlight-bg: color-mix(in srgb, var(--ddlc-blush) 85%, transparent);
   --interactive-accent: var(--ddlc-plum);
   --interactive-accent-hover: var(--ddlc-pink);
   --code-background: color-mix(in srgb, var(--ddlc-dot) 70%, var(--ddlc-paper));
   --code-normal: var(--ddlc-ink);
   --bold-color: var(--ddlc-plum);
   --italic-color: var(--ddlc-yuri);
-  --table-border-color: var(--ddlc-blush);
   --table-header-background: color-mix(in srgb, var(--ddlc-dot) 80%, transparent);
   --tag-background: color-mix(in srgb, var(--ddlc-blush) 50%, transparent);
   --tag-color: var(--ddlc-plum);
 }
 
 .theme-dark {
-  --ddlc-ground: var(--ddlc-ink);
   --ddlc-dots: color-mix(in srgb, var(--ddlc-yuri-shadow) 75%, var(--ddlc-ink));
-  --ddlc-accent: var(--ddlc-pink);
   --ddlc-outline: var(--ddlc-yuri);
-  --ddlc-muted: color-mix(in srgb, var(--ddlc-jacket) 75%, var(--ddlc-paper));
 
   --background-primary: color-mix(in srgb, var(--ddlc-yuri) 18%, var(--ddlc-ink));
   --background-primary-alt: var(--ddlc-yuri-shadow);
   --background-secondary: color-mix(in srgb, var(--ddlc-yuri-shadow) 45%, var(--ddlc-ink));
   --background-secondary-alt: color-mix(in srgb, var(--ddlc-yuri-shadow) 70%, var(--ddlc-ink));
-  --background-modifier-border: var(--ddlc-yuri);
-  --background-modifier-border-hover: var(--ddlc-plum);
   --background-modifier-border-focus: var(--ddlc-pink);
   --background-modifier-hover: color-mix(in srgb, var(--ddlc-yuri) 45%, transparent);
   --background-modifier-active-hover: color-mix(in srgb, var(--ddlc-yuri) 70%, transparent);
-  --text-normal: var(--ddlc-paper);
-  --text-muted: var(--ddlc-muted);
-  --text-faint: var(--ddlc-jacket);
-  --text-accent: var(--ddlc-pink);
-  --text-accent-hover: var(--ddlc-blush);
-  --text-on-accent: var(--ddlc-paper);
-  --text-selection: color-mix(in srgb, var(--ddlc-yuri) 90%, transparent);
-  --text-highlight-bg: color-mix(in srgb, var(--ddlc-plum) 55%, transparent);
   --interactive-accent: var(--ddlc-plum);
   --interactive-accent-hover: var(--ddlc-pink);
   --code-background: var(--ddlc-ink);
   --code-normal: var(--ddlc-paper);
   --bold-color: var(--ddlc-blush);
   --italic-color: var(--ddlc-natsuki);
-  --table-border-color: var(--ddlc-yuri);
   --table-header-background: color-mix(in srgb, var(--ddlc-yuri) 35%, transparent);
   --tag-background: color-mix(in srgb, var(--ddlc-blush) 85%, transparent);
   --tag-color: var(--ddlc-yuri-shadow);
@@ -330,32 +321,24 @@ body {
   --callout-summary: var(--ddlc-accent);
 }
 
-.theme-light {
-  --ddlc-popup: color-mix(in srgb, var(--ddlc-dot) 70%, var(--ddlc-paper));
-}
-
-.theme-dark {
-  --ddlc-popup: var(--ddlc-dot);
-}
-
 .callout {
   --callout-padding: 0.9em 1.3em 1em;
   --callout-radius: 0;
-  border: 6px solid var(--ddlc-blush);
-  background-color: var(--ddlc-popup);
+  border: 6px solid var(--ddlc-popup-frame);
+  background-color: var(--ddlc-popup-ground);
 }
 
 /* on the dark sheet the pale pop-up writes in ink; plum alone is 3.4:1 on dot,
    so the accents inside are plum darkened with ink */
 .theme-dark .callout {
-  --text-normal: var(--ddlc-ink);
+  --text-normal: var(--ddlc-popup-text);
   --text-muted: color-mix(in srgb, var(--ddlc-ink) 55%, var(--ddlc-jacket));
   --text-faint: var(--ddlc-jacket);
-  --text-accent: color-mix(in srgb, var(--ddlc-plum) 70%, var(--ddlc-ink));
+  --text-accent: var(--ddlc-popup-accent);
   --text-accent-hover: var(--ddlc-plum);
   --link-color: var(--text-accent);
   --link-external-color: var(--text-accent);
-  --bold-color: color-mix(in srgb, var(--ddlc-plum) 70%, var(--ddlc-ink));
+  --bold-color: var(--ddlc-popup-accent);
   --italic-color: var(--ddlc-yuri);
   --list-marker-color: var(--ddlc-plum);
   --code-background: color-mix(in srgb, var(--ddlc-blush) 60%, var(--ddlc-dot));
@@ -363,7 +346,7 @@ body {
   --text-highlight-bg: var(--ddlc-blush);
   --text-selection: color-mix(in srgb, var(--ddlc-blush) 80%, transparent);
   --collapse-icon-color: var(--ddlc-plum);
-  color: var(--ddlc-ink);
+  color: var(--ddlc-popup-text);
 }
 
 .theme-dark .callout-icon {
@@ -385,21 +368,8 @@ body {
 
 /* the properties: a signboard of their own, its foot shaded like the game's
    name tab; on ink the shade is only partly ink, or it reads as a black seam,
-   and the frame takes the shade so the foot shows two bands, as on paper */
-.theme-light {
-  --ddlc-board: color-mix(in srgb, var(--ddlc-dot) 50%, var(--ddlc-paper));
-  --ddlc-board-frame: var(--ddlc-dot);
-  --ddlc-board-shade: color-mix(in srgb, var(--ddlc-board) 80%, var(--ddlc-jacket));
-  --ddlc-board-drop: var(--ddlc-blush);
-}
-
-.theme-dark {
-  --ddlc-board: color-mix(in srgb, var(--ddlc-yuri) 30%, var(--ddlc-ink));
-  --ddlc-board-frame: var(--ddlc-board-shade);
-  --ddlc-board-shade: color-mix(in srgb, var(--ddlc-board) 60%, var(--ddlc-ink));
-  --ddlc-board-drop: var(--ddlc-blush);
-}
-
+   and the frame takes the shade so the foot shows two bands, as on paper. The board's
+   colours are the shared roles --ddlc-board, -frame, -shade and -drop */
 .metadata-container {
   padding: 0.6em 1em 0.9em;
   border: 3px solid var(--ddlc-board-frame);
@@ -417,14 +387,6 @@ body {
    a strip of translucent tape across its top edge, clear of the text. In Live
    Preview a quote is one line per row, so the tape goes on the row that follows
    a non-quote row */
-.theme-light {
-  --ddlc-tape: color-mix(in srgb, var(--ddlc-blush) 70%, transparent);
-}
-
-.theme-dark {
-  --ddlc-tape: color-mix(in srgb, var(--ddlc-pink) 60%, transparent);
-}
-
 .markdown-rendered blockquote {
   position: relative;
   margin-top: 1.4em;
@@ -459,11 +421,11 @@ body {
   pointer-events: none;
 }
 
-/* A code block is a small kitty window opened over the note: the same base16 slots the
-   kitty theme gives its ground, text, selection and tab bar, dark on both sides, with the
-   code painted in the groups ddlc.nvim uses. Obsidian has one punctuation colour where
-   ddlc.nvim splits brackets from delimiters, and brackets are most of it, so it takes
-   theirs. The variables are set on the block alone, so inline code keeps the sheet's own
+/* A code block is a small kitty window opened over the note: the shared window roles,
+   which are the base16 slots the kitty theme gives its ground, text, selection and tab
+   bar, dark on both sides, with the code painted from the shared syntax table's dark
+   column. Obsidian has one punctuation colour where the table splits text from
+   delimiters, and brackets are most of it, so it takes the text. The variables are set on the block alone, so inline code keeps the sheet's own
    colours. The window is square, as a tiled kitty window is; its title bar carries a
    prompt, the block's language and one round control that copies.
    Every size here is in the code's own em, so the bar, the label and the control keep
@@ -480,25 +442,21 @@ body {
 .markdown-source-view.mod-cm6 .HyperMD-codeblock {
   --code-radius: 0;
   --code-border-width: 1px;
-  --code-border-color: var(--ddlc-base02);
-  --ddlc-bar: var(--ddlc-base01);
-  --ddlc-title: color-mix(in srgb, var(--ddlc-base05) 80%, var(--ddlc-base01));
-  --ddlc-control-bg: color-mix(in srgb, var(--ddlc-base05) 14%, var(--ddlc-base01));
-  --ddlc-control-bg-hover: color-mix(in srgb, var(--ddlc-base05) 28%, var(--ddlc-base01));
-  --text-success: var(--ddlc-base0B);
-  --code-background: var(--ddlc-base00);
-  --code-normal: var(--ddlc-base05);
-  --code-comment: var(--ddlc-base03);
-  --code-keyword: var(--ddlc-base0E);
-  --code-string: var(--ddlc-base0B);
-  --code-function: var(--ddlc-base0D);
-  --code-value: var(--ddlc-base09);
-  --code-tag: var(--ddlc-base0A);
-  --code-property: var(--ddlc-base05);
-  --code-punctuation: var(--ddlc-base05);
-  --code-operator: var(--ddlc-base05);
-  --code-important: var(--ddlc-base08);
-  --text-selection: var(--ddlc-base02);
+  --code-border-color: var(--ddlc-window-border);
+  --text-success: var(--ddlc-syntax-string);
+  --code-background: var(--ddlc-window-ground);
+  --code-normal: var(--ddlc-window-text);
+  --code-comment: var(--ddlc-syntax-comment);
+  --code-keyword: var(--ddlc-syntax-keyword);
+  --code-string: var(--ddlc-syntax-string);
+  --code-function: var(--ddlc-syntax-function);
+  --code-value: var(--ddlc-syntax-number);
+  --code-tag: var(--ddlc-syntax-type);
+  --code-property: var(--ddlc-syntax-text);
+  --code-punctuation: var(--ddlc-syntax-text);
+  --code-operator: var(--ddlc-syntax-text);
+  --code-important: var(--ddlc-syntax-builtin);
+  --text-selection: var(--ddlc-window-selection);
 }
 
 .markdown-rendered pre .token.comment,
@@ -517,7 +475,7 @@ body {
   font-family: var(--font-monospace);
   font-size: var(--code-size);
   background:
-    linear-gradient(var(--ddlc-bar), var(--ddlc-bar)) top / 100% var(--ddlc-bar-h) no-repeat,
+    linear-gradient(var(--ddlc-window-bar), var(--ddlc-window-bar)) top / 100% var(--ddlc-bar-h) no-repeat,
     var(--code-background);
   box-shadow: 4px 4px 0 var(--ddlc-board-drop);
 }
@@ -541,7 +499,7 @@ body {
 .markdown-rendered pre::after {
   content: ">";
   left: var(--ddlc-code-inset);
-  color: var(--ddlc-base0E);
+  color: var(--ddlc-window-prompt);
 }
 
 /* The class reads "language-<key>", and CSS cannot cut a prefix off an attribute, so the
@@ -555,7 +513,7 @@ body {
   content: attr(class);
   left: calc(var(--ddlc-code-inset) + 2ch);
   overflow: hidden;
-  color: var(--ddlc-title);
+  color: var(--ddlc-window-title);
 }
 
 .markdown-rendered pre[class^="language-"]::before {
@@ -579,19 +537,19 @@ body {
   padding: 0;
   border-radius: 50%;
   font-size: inherit;
-  background-color: var(--ddlc-control-bg);
-  color: var(--ddlc-title);
+  background-color: var(--ddlc-window-control);
+  color: var(--ddlc-window-title);
   box-shadow: none;
 }
 
 .markdown-rendered pre > button.copy-code-button:hover {
-  background-color: var(--ddlc-control-bg-hover);
-  color: var(--ddlc-base07);
+  background-color: var(--ddlc-window-control-hover);
+  color: var(--ddlc-window-control-live);
 }
 
 .markdown-rendered pre > button.copy-code-button:active {
-  background-color: var(--ddlc-base0E);
-  color: var(--ddlc-base00);
+  background-color: var(--ddlc-window-prompt);
+  color: var(--ddlc-window-ground);
 }
 
 .markdown-rendered pre > button.copy-code-button svg {
@@ -606,7 +564,7 @@ body {
   position: relative;
   padding-top: calc((var(--ddlc-bar-h) - 1lh) / 2);
   padding-bottom: calc((var(--ddlc-bar-h) - 1lh) / 2 + var(--ddlc-bar-gap));
-  background-image: linear-gradient(var(--ddlc-bar), var(--ddlc-bar));
+  background-image: linear-gradient(var(--ddlc-window-bar), var(--ddlc-window-bar));
   background-size: 100% var(--ddlc-bar-h);
   background-repeat: no-repeat;
 }
@@ -619,7 +577,7 @@ body {
    the letter instead of inverting it, so the block is translucent and the letter shows */
 .markdown-source-view.mod-cm6 .HyperMD-codeblock {
   box-shadow: 4px 4px 0 var(--ddlc-board-drop);
-  caret-color: color-mix(in srgb, var(--ddlc-base05) 65%, transparent);
+  caret-color: var(--ddlc-window-caret);
   caret-shape: block;
 }
 
@@ -627,7 +585,7 @@ body {
    steps past the prompt, so the bar reads as a prompt with the fence typed after it */
 .markdown-source-view.mod-cm6 .HyperMD-codeblock-begin .cm-formatting-code-block {
   padding-left: 2ch;
-  color: var(--ddlc-title);
+  color: var(--ddlc-window-title);
 }
 
 /* The prompt sits on the row, so a block without a language keeps it alone. Obsidian's
@@ -646,7 +604,7 @@ body {
 .markdown-source-view.mod-cm6 .HyperMD-codeblock-begin::before {
   content: ">";
   left: var(--ddlc-code-inset);
-  color: var(--ddlc-base0E);
+  color: var(--ddlc-window-prompt);
 }
 
 .markdown-source-view.mod-cm6 .code-block-flair {
@@ -657,7 +615,7 @@ body {
   background: none;
   font-size: inherit;
   text-transform: lowercase;
-  color: var(--ddlc-title);
+  color: var(--ddlc-window-title);
 }
 
 /* a block without a language gets Obsidian's own copy icon in the flair; the round
@@ -679,14 +637,14 @@ body {
   width: var(--ddlc-control);
   height: var(--ddlc-control);
   border-radius: 50%;
-  background-color: var(--ddlc-control-bg);
+  background-color: var(--ddlc-window-control);
 }
 
 .markdown-source-view.mod-cm6 .code-block-flair::after {
   right: calc((var(--ddlc-bar-h) - var(--ddlc-control-icon)) / 2);
   width: var(--ddlc-control-icon);
   height: var(--ddlc-control-icon);
-  background-color: var(--ddlc-title);
+  background-color: var(--ddlc-window-title);
   -webkit-mask: var(--ddlc-icon-copy) center / contain no-repeat;
   mask: var(--ddlc-icon-copy) center / contain no-repeat;
 }
@@ -697,19 +655,19 @@ body {
 }
 
 .markdown-source-view.mod-cm6 .code-block-flair:hover::before {
-  background-color: var(--ddlc-control-bg-hover);
+  background-color: var(--ddlc-window-control-hover);
 }
 
 .markdown-source-view.mod-cm6 .code-block-flair:hover::after {
-  background-color: var(--ddlc-base07);
+  background-color: var(--ddlc-window-control-live);
 }
 
 .markdown-source-view.mod-cm6 .code-block-flair:active::before {
-  background-color: var(--ddlc-base0E);
+  background-color: var(--ddlc-window-prompt);
 }
 
 .markdown-source-view.mod-cm6 .code-block-flair:active::after {
-  background-color: var(--ddlc-base00);
+  background-color: var(--ddlc-window-ground);
 }
 
 /* Task states beyond done and open, the set most themes share. Each state names an
@@ -782,15 +740,7 @@ button.mod-cta {
 
 /* the switches: Obsidian paints one that is off in the hover border's colour, which
    is the plum of one that is on. Off takes the jacket's grey instead, so the two
-   states differ in hue and not only in shade */
-.theme-light {
-  --ddlc-switch-off: var(--ddlc-jacket);
-}
-
-.theme-dark {
-  --ddlc-switch-off: color-mix(in srgb, var(--ddlc-jacket) 55%, var(--ddlc-ink));
-}
-
+   states differ in hue and not only in shade. The grey is the shared --ddlc-switch-off */
 .checkbox-container:not(.is-enabled) {
   background-color: var(--ddlc-switch-off);
 }

@@ -10,7 +10,7 @@ The following are derived from official DDLC material:
 
 | Path | What |
 | --- | --- |
-| `vendor/palette.css`, `vendor/base16-ddlc-dark.yaml`, `theme.css` | the colours come from [ddlc-palette](https://github.com/rokokol/ddlc-palette), which measures them off [ddlc.moe](https://ddlc.moe/). Where each colour goes in Obsidian is mine, the values are theirs |
+| `vendor/palette.css`, `vendor/base16-ddlc-dark.yaml`, `vendor/ddlc-tokens.css`, `theme.css` | the colours come from [ddlc-palette](https://github.com/rokokol/ddlc-palette), which measures them off [ddlc.moe](https://ddlc.moe/). Where each colour goes in Obsidian is mine, the values are theirs |
 | `src/ddlc.css` | the polka-dot background, the "Just Monika." pop-up and the poem sheet are drawn after the game's menu, pop-up and poem screen. They are drawn in CSS, and no game artwork is copied |
 
 The following official artwork is bundled:

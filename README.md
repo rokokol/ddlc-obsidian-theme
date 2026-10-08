@@ -15,7 +15,7 @@
 
 ![the theme light above the diagonal and dark below it, with chibi Monika in the corner](docs/cover.png)
 
-The theme is called **DDLC** inside Obsidian. Its colours come from [ddlc-palette](https://github.com/rokokol/ddlc-palette) parsed from ddlc.moe, the same palette as [ddlc-themes](https://github.com/rokokol/ddlc-themes) for kitty, btop and the rest, and [ddlc.nvim](https://github.com/rokokol/ddlc.nvim)
+The theme is called **DDLC** inside Obsidian. Its colours come from [ddlc-palette](https://github.com/rokokol/ddlc-palette) parsed from ddlc.moe, and the roles they play, from muted text to the code window's syntax, come from [ddlc-themes](https://github.com/rokokol/ddlc-themes). So a note reads in the same colours as the kitty, btop and web themes there and [ddlc.nvim](https://github.com/rokokol/ddlc.nvim)
 
 | ![the theme, light variant](docs/light.png) | ![the theme, dark variant](docs/dark.png) |
 | ------------------------------------------- | ----------------------------------------- |

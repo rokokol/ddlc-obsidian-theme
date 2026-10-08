@@ -112,7 +112,7 @@ at_names() { # at_names FILE -> "keyframes NAME" and "property NAME" lines, sort
 }
 
 check_behaviour() {
-  local repo built snippet colours slots icons stickers shared switches switch
+  local repo built snippet colours slots icons roles stickers shared switches switch
   if [[ -n "${CHECK_BASH32:-}" ]]; then
     echo "== this bash is the 3.2 under proof"
     ((BASH_VERSINFO[0] == 3)) || fail "CHECK_BASH32 is set, but this bash is $BASH_VERSION"
@@ -137,6 +137,9 @@ check_behaviour() {
   (($(grep -c -- '--ddlc-base0[[:xdigit:]]: #' "$built") == slots)) || fail "the theme lost a base16 slot"
   (($(grep -c -- '--ddlc-icon-[a-z-]*: url(' "$built") == icons)) || fail "the theme lost an icon"
   grep -qF "$(sed -n 1p vendor/lucide/LICENSE)" "$built" || fail "the theme lost the icons' licence notice"
+  roles=$(grep -c -- '^ *--ddlc-[a-z0-9-]*: ' vendor/ddlc-tokens.css)
+  ((roles > 0)) || fail "vendor/ddlc-tokens.css holds no role"
+  grep -qF "$(grep -m1 -- '^ *--ddlc-' vendor/ddlc-tokens.css)" "$built" || fail "the theme lost the shared roles"
   grep -q 'build-stamp\|#[0-9A-Fa-f]\{6\}' src/ddlc.css && fail "src/ddlc.css holds a literal colour or a stamp"
 
   echo "== the snippet carries every sticker frame, and the theme carries none"
@@ -180,6 +183,10 @@ check_behaviour() {
   repo=$(copy_repo licence-closes-comment)
   printf 'a stray */ here\n' >>"$repo/vendor/lucide/LICENSE"
   expect_fail "an icon licence that would close its comment" 1 "cannot sit in a comment" "$BASH" "$repo/generate.sh" build
+
+  repo=$(copy_repo no-tokens)
+  rm -f "$repo/vendor/ddlc-tokens.css"
+  expect_fail "missing shared roles" 1 "missing" "$BASH" "$repo/generate.sh" build
 
   repo=$(copy_repo no-template)
   rm -f "$repo/src/ddlc.css"
