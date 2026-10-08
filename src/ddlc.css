@@ -276,6 +276,25 @@ body {
   letter-spacing: 0.02em;
 }
 
+/* A link in the lettering keeps its white fill. The link colour is the outline's
+   colour, so a coloured fill closed the letters up. The underline in the outline's
+   colour still shows it is a link */
+.markdown-rendered h1,
+.markdown-rendered h2,
+.HyperMD-header-1,
+.HyperMD-header-2 {
+  --link-color: var(--ddlc-paper);
+  --link-color-hover: var(--ddlc-paper);
+  --link-external-color: var(--ddlc-paper);
+  --link-external-color-hover: var(--ddlc-paper);
+  --link-unresolved-color: var(--ddlc-paper);
+}
+
+.markdown-rendered :is(h1, h2) a,
+:is(.HyperMD-header-1, .HyperMD-header-2) :is(.cm-hmd-internal-link, .cm-link) {
+  text-decoration-color: var(--ddlc-outline);
+}
+
 .markdown-rendered h3,
 .markdown-rendered h4,
 .markdown-rendered h5,
