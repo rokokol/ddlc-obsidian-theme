@@ -8,6 +8,10 @@ All notable changes to this theme are documented in this file. The format follow
 
 - `ddlc-still.css`, an optional snippet in each release that stops the drift of the polka-dot background to save power
 
+### Fixed
+
+- A switch that is off is grey, so it no longer looks like one that is on
+
 ## [0.1.1] - 2026-10-08
 
 ### Fixed

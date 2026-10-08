@@ -780,6 +780,21 @@ button.mod-cta {
   box-shadow: 0 0 0 2px var(--ddlc-paper), 0 0 0 4px var(--ddlc-accent);
 }
 
+/* the switches: Obsidian paints one that is off in the hover border's colour, which
+   is the plum of one that is on. Off takes the jacket's grey instead, so the two
+   states differ in hue and not only in shade */
+.theme-light {
+  --ddlc-switch-off: var(--ddlc-jacket);
+}
+
+.theme-dark {
+  --ddlc-switch-off: color-mix(in srgb, var(--ddlc-jacket) 55%, var(--ddlc-ink));
+}
+
+.checkbox-container:not(.is-enabled) {
+  background-color: var(--ddlc-switch-off);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .workspace-leaf-content[data-type="markdown"] .view-content::before {
     animation: none;
