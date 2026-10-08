@@ -2,6 +2,24 @@
 
 All notable changes to this theme are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the theme uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## Unreleased
+
+### Added
+
+- Each callout has a sticker in its type's colour on the margin, with the type's icon on it. The stickers are cut and stuck a little differently for each type. Where the margin is too narrow, the sticker sits on the callout's frame
+- An `experiment` callout type, with a flask icon
+
+### Changed
+
+- A callout is centred: its title, its text, and its lists and tables as whole blocks
+- A table in a callout has a pink head with dark text in both variants
+- The arrow of a foldable callout is darker and heavier
+
+### Fixed
+
+- A link in a callout's title keeps the title's white letters
+- In the dark variant, a done task in a callout is readable
+
 ## [0.3.0] - 2026-10-08
 
 ### Changed

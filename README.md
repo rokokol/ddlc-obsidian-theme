@@ -24,7 +24,7 @@ The theme is called **DDLC** inside Obsidian. Its colours come from [ddlc-palett
 
 - A pink polka-dot background that slowly drifts, as on the game's menu, under a white poem sheet with faint ruled lines
 - Headings lettered like the game's menu, white inside an outline
-- Callouts drawn as the "Just Monika." pop-up, the same for every callout type, which tells itself apart by its icon
+- Callouts drawn as the "Just Monika." pop-up with everything centred, and a sticker in the type's colour on the margin carries its icon, see [Callouts](#callouts)
 - Properties on a signboard of their own, quotes as notes taped onto the sheet, and `---` as the fold of an exercise book
 - Code blocks as small terminal windows in the colours of the kitty and nvim themes, with the language and a copy button in the title bar
 - Icons for the task states most themes share, such as `[/]`, `[!]`, `[?]` and `[b]`

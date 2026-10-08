@@ -271,11 +271,12 @@ body {
 
 /* A link in the lettering keeps its white fill. The link colour is the outline's
    colour, so a coloured fill closed the letters up. The underline in the outline's
-   colour still shows it is a link */
+   colour still shows it is a link. A callout's title is lettered too, in plum */
 .markdown-rendered h1,
 .markdown-rendered h2,
 .HyperMD-header-1,
-.HyperMD-header-2 {
+.HyperMD-header-2,
+.callout-title-inner {
   --link-color: var(--ddlc-paper);
   --link-color-hover: var(--ddlc-paper);
   --link-external-color: var(--ddlc-paper);
@@ -286,6 +287,10 @@ body {
 .markdown-rendered :is(h1, h2) a,
 :is(.HyperMD-header-1, .HyperMD-header-2) :is(.cm-hmd-internal-link, .cm-link) {
   text-decoration-color: var(--ddlc-outline);
+}
+
+.callout-title-inner a {
+  text-decoration-color: var(--ddlc-plum);
 }
 
 .markdown-rendered h3,
@@ -300,25 +305,31 @@ body {
 }
 
 /* The "Just Monika." pop-up: a pale ground in a plain thick blush frame, the
-   title lettered like its OK button. It stays pale on the dark sheet too, the
-   way the pop-up stands over the game's dark screen. Every type wears the same
-   colours; the type speaks through its icon alone */
+   title lettered like its OK button, everything centred. It stays pale on the
+   dark sheet too, the way the pop-up stands over the game's dark screen. Every
+   type wears the same pop-up; its kind is a sticker in the shared kind roles */
 .theme-light,
 .theme-dark {
-  --callout-default: var(--ddlc-accent);
-  --callout-info: var(--ddlc-accent);
-  --callout-todo: var(--ddlc-accent);
-  --callout-important: var(--ddlc-accent);
-  --callout-tip: var(--ddlc-accent);
-  --callout-success: var(--ddlc-accent);
-  --callout-question: var(--ddlc-accent);
-  --callout-warning: var(--ddlc-accent);
-  --callout-fail: var(--ddlc-accent);
-  --callout-error: var(--ddlc-accent);
-  --callout-bug: var(--ddlc-accent);
-  --callout-example: var(--ddlc-accent);
-  --callout-quote: var(--ddlc-accent);
-  --callout-summary: var(--ddlc-accent);
+  --callout-default: var(--ddlc-kind-note);
+  --callout-info: var(--ddlc-kind-note);
+  --callout-todo: var(--ddlc-kind-note);
+  --callout-important: var(--ddlc-kind-summary);
+  --callout-tip: var(--ddlc-kind-tip);
+  --callout-success: var(--ddlc-kind-success);
+  --callout-question: var(--ddlc-kind-warning);
+  --callout-warning: var(--ddlc-kind-warning);
+  --callout-fail: var(--ddlc-kind-danger);
+  --callout-error: var(--ddlc-kind-danger);
+  --callout-bug: var(--ddlc-kind-danger);
+  --callout-example: var(--ddlc-kind-example);
+  --callout-quote: var(--ddlc-kind-quote);
+  --callout-summary: var(--ddlc-kind-summary);
+}
+
+/* a kind Obsidian does not have: an experiment or a real case in a study note */
+.callout[data-callout="experiment"] {
+  --callout-color: var(--ddlc-kind-experiment);
+  --callout-icon: lucide-flask-conical;
 }
 
 .callout {
@@ -326,6 +337,187 @@ body {
   --callout-radius: 0;
   border: 6px solid var(--ddlc-popup-frame);
   background-color: var(--ddlc-popup-ground);
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  /* A table's head takes the frame's colour and the pop-up's ink on both sides; the
+     sheet's head colours are reckoned on the sheet and blur on the pale pop-up. The
+     rules are a shade darker than the head, so its cells stay apart. A done task is
+     muted in the pop-up's own muted ink, which the sheet's value is not */
+  --table-header-background: var(--ddlc-popup-frame);
+  --table-header-color: var(--ddlc-popup-text);
+  --table-border-color: color-mix(in srgb, var(--ddlc-plum) 35%, var(--ddlc-popup-frame));
+  --table-header-border-color: var(--table-border-color);
+  --checklist-done-color: var(--text-muted);
+  --list-marker-color: var(--ddlc-plum);
+}
+
+/* A list or a table centres as one block and keeps its own left edge inside, so
+   the markers stand in one column; code keeps its left edge too */
+.callout-content > :is(ul, ol, table) {
+  width: fit-content;
+  margin-inline: auto;
+  text-align: start;
+}
+
+.callout-content :is(pre, .HyperMD-codeblock) {
+  text-align: start;
+}
+
+/* The sticker is the callout's own icon on a strip of the kind's colour, stuck on
+   the margin half an icon clear of the frame. Each kind has its own cut and tilt,
+   and some have a corner bent back, so the strip of them looks stuck by hand; a
+   kind this sheet does not know gets the plain strip. The icon takes the black or
+   white that reads on the strip, and ink where the browser cannot choose */
+.callout {
+  --ddlc-sticker-w: 4.4em;
+  --ddlc-sticker-h: 2em;
+  --ddlc-sticker-tilt: -4deg;
+  --ddlc-sticker-dx: 0em;
+  --ddlc-sticker-dy: 0em;
+  --ddlc-sticker-fold: 0em;
+  --ddlc-sticker-fold-at: 225deg;
+  --ddlc-sticker-on: var(--ddlc-ink);
+}
+
+@supports (color: contrast-color(red)) {
+  .callout {
+    --ddlc-sticker-on: contrast-color(var(--callout-color));
+  }
+}
+
+.callout > .callout-title > .callout-icon {
+  --icon-size: 1.15em;
+  position: absolute;
+  top: calc(0.4em + var(--ddlc-sticker-dy));
+  right: calc(100% + 6px + 0.6em + var(--icon-size) / 2 + var(--ddlc-sticker-dx));
+  width: var(--ddlc-sticker-w);
+  height: var(--ddlc-sticker-h);
+  justify-content: center;
+  background: linear-gradient(var(--ddlc-sticker-fold-at), transparent var(--ddlc-sticker-fold), var(--callout-color) 0);
+  filter: drop-shadow(2px 2px 0 color-mix(in srgb, var(--callout-color) 55%, var(--ddlc-ink)));
+  transform: rotate(var(--ddlc-sticker-tilt));
+}
+
+.callout > .callout-title > .callout-icon .svg-icon {
+  color: var(--ddlc-sticker-on);
+}
+
+/* Live Preview wraps a callout in a block that clips its paint to its own box,
+   and Obsidian sets that clip with !important, so only !important lifts it. The
+   block also hides its overflow under the pointer, which this selector outranks */
+.markdown-source-view.mod-cm6 .cm-content > .cm-embed-block.cm-callout[contenteditable="false"] {
+  contain: none !important;
+  overflow: visible;
+}
+
+/* the fold arrow takes the title's colour, which is the kind's and too pale on
+   the pop-up, so it is drawn in the pop-up's accent and heavier */
+.callout-fold {
+  --icon-size: 1.1em;
+  --icon-stroke: 3px;
+  color: var(--ddlc-popup-accent);
+}
+
+/* a bent corner: the corner is cut away, and its back lies folded over the strip */
+.callout > .callout-title > .callout-icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(var(--ddlc-sticker-fold) * 1.4142);
+  height: calc(var(--ddlc-sticker-fold) * 1.4142);
+  background: linear-gradient(var(--ddlc-sticker-fold-at), transparent 50%, color-mix(in srgb, var(--callout-color) 55%, var(--ddlc-paper)) 50%);
+}
+
+.callout:is([data-callout="tip"], [data-callout="hint"]) {
+  --ddlc-sticker-w: 3.6em;
+  --ddlc-sticker-tilt: 3deg;
+  --ddlc-sticker-dx: 0.5em;
+  --ddlc-sticker-dy: 0.2em;
+  --ddlc-sticker-fold: 0.5em;
+}
+
+.callout:is([data-callout="success"], [data-callout="check"], [data-callout="done"]) {
+  --ddlc-sticker-w: 4.8em;
+  --ddlc-sticker-tilt: -7deg;
+  --ddlc-sticker-dx: -0.3em;
+  --ddlc-sticker-dy: -0.1em;
+}
+
+.callout:is([data-callout="warning"], [data-callout="caution"], [data-callout="attention"]) {
+  --ddlc-sticker-w: 4em;
+  --ddlc-sticker-tilt: 2deg;
+  --ddlc-sticker-dx: 0.2em;
+  --ddlc-sticker-dy: 0.3em;
+  --ddlc-sticker-fold: 0.45em;
+  --ddlc-sticker-fold-at: 45deg;
+}
+
+.callout:is([data-callout="warning"], [data-callout="caution"], [data-callout="attention"]) > .callout-title > .callout-icon::after {
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 0;
+}
+
+.callout:is([data-callout="danger"], [data-callout="error"]) {
+  --ddlc-sticker-w: 4.6em;
+  --ddlc-sticker-tilt: -2deg;
+  --ddlc-sticker-dx: -0.5em;
+}
+
+.callout[data-callout="example"] {
+  --ddlc-sticker-w: 3.8em;
+  --ddlc-sticker-tilt: 5deg;
+  --ddlc-sticker-dx: 0.3em;
+  --ddlc-sticker-dy: -0.2em;
+  --ddlc-sticker-fold: 0.55em;
+  --ddlc-sticker-fold-at: 315deg;
+}
+
+.callout[data-callout="example"] > .callout-title > .callout-icon::after {
+  top: auto;
+  bottom: 0;
+}
+
+.callout[data-callout="experiment"] {
+  --ddlc-sticker-w: 4.3em;
+  --ddlc-sticker-tilt: 6deg;
+  --ddlc-sticker-dx: -0.2em;
+  --ddlc-sticker-dy: 0.15em;
+}
+
+.callout:is([data-callout="quote"], [data-callout="cite"]) {
+  --ddlc-sticker-w: 4.2em;
+  --ddlc-sticker-tilt: -5deg;
+  --ddlc-sticker-dy: 0.25em;
+}
+
+/* Where the margin is too narrow for the sticker, it sits across the frame's top
+   left corner. A container query cannot read --file-line-width, so the width is
+   Obsidian's default line of 700px and the reach of the widest sticker on both
+   sides. Without a readable line there is no margin at all */
+.markdown-preview-view,
+.markdown-source-view {
+  container: ddlc-page / inline-size;
+}
+
+:is(.markdown-preview-view, .markdown-source-view):not(.is-readable-line-width) {
+  --ddlc-no-margin: 1;
+}
+
+@container ddlc-page (width < 960px) or style(--ddlc-no-margin: 1) {
+  .callout,
+  .markdown-source-view.mod-cm6 .callout {
+    margin-top: 1.6em;
+  }
+
+  .callout > .callout-title > .callout-icon {
+    right: auto;
+    left: calc(-6px - 1.1em - var(--ddlc-sticker-dx));
+    top: calc(-6px - 0.7em + var(--ddlc-sticker-dy));
+  }
 }
 
 /* on the dark sheet the pale pop-up writes in ink; plum alone is 3.4:1 on dot,
@@ -340,7 +532,6 @@ body {
   --link-external-color: var(--text-accent);
   --bold-color: var(--ddlc-popup-accent);
   --italic-color: var(--ddlc-yuri);
-  --list-marker-color: var(--ddlc-plum);
   --code-background: color-mix(in srgb, var(--ddlc-blush) 60%, var(--ddlc-dot));
   --code-normal: var(--ddlc-ink);
   --text-highlight-bg: var(--ddlc-blush);
@@ -349,11 +540,8 @@ body {
   color: var(--ddlc-popup-text);
 }
 
-.theme-dark .callout-icon {
-  color: var(--ddlc-plum);
-}
-
 .callout-title {
+  justify-content: center;
   gap: 0.5em;
   font-family: var(--ddlc-heading-font);
 }
