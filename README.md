@@ -33,7 +33,18 @@ The theme is called **DDLC** inside Obsidian. Its colours come from [ddlc-palett
 
 Headings use the game's `Doki` font where it is installed; the theme does not ship it, see [ASSETS.md](ASSETS.md)
 
-![live preview mode](docs/live_preview.jpg)
+![live preview mode](docs/live_preview.png)
+
+## Callouts
+
+![every callout type as a pale pop-up, each with a sticker of its colour on the margin](docs/callouts.png)
+
+Every callout type has its own sticker colour, cut and tilt. The theme adds one type of its own, `experiment`, with a flask icon, for an experiment or a real case in a study note:
+
+```markdown
+> [!experiment] Rutherford and Marsden, 1908–1911
+> A radioactive source sits in a lead box
+```
 
 ## Install
 
@@ -41,7 +52,7 @@ Download `theme.css` and `manifest.json` from the [latest release](https://githu
 
 ## The club on an empty tab
 
-![Sayori, Monika, Natsuki and Yuri walking along the foot of an empty tab](docs/dokis.jpg)
+![Sayori, Monika, Natsuki and Yuri walking along the foot of an empty tab](docs/dokis.png)
 
 An optional snippet puts the four girls at the foot of every empty tab, as on the [ddlc-sddm-theme](https://github.com/rokokol/ddlc-sddm-theme) login screen. They walk to and fro, hop now and then, and hop when the cursor touches them
 
