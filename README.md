@@ -53,6 +53,10 @@ It is a snippet and not a part of the theme for these reasons:
 - The girls move all the time, and not everybody wants motion on an empty tab
 - The pictures are embedded in the file, so the snippet is several times larger than the theme
 
+## A still background
+
+The drifting dots keep Obsidian drawing a new frame on every screen refresh while a note is on screen, which costs some battery on a laptop. The optional `ddlc-still.css` snippet from the same [release](https://github.com/rokokol/ddlc-obsidian-theme/releases/latest) stops the drift and leaves the dots in place. Install it the same way as the stickers. It has an effect only with the DDLC theme
+
 ## Build
 
 `theme.css` is generated, and each release carries one built from its own sources. Its colours and icons come from copies of other repositories kept in `vendor/`, and only `src/ddlc.css` is written by hand

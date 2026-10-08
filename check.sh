@@ -112,7 +112,7 @@ at_names() { # at_names FILE -> "keyframes NAME" and "property NAME" lines, sort
 }
 
 check_behaviour() {
-  local repo built snippet colours slots icons stickers shared
+  local repo built snippet colours slots icons stickers shared switches switch
   if [[ -n "${CHECK_BASH32:-}" ]]; then
     echo "== this bash is the 3.2 under proof"
     ((BASH_VERSINFO[0] == 3)) || fail "CHECK_BASH32 is set, but this bash is $BASH_VERSION"
@@ -148,6 +148,13 @@ check_behaviour() {
   echo "== the snippet names no animation or property the theme names"
   shared=$(comm -12 <(at_names "$built") <(at_names "$snippet"))
   [[ -z "$shared" ]] || fail "the snippet would replace the theme's $(printf '%s' "$shared" | tr '\n' ',')"
+
+  echo "== the still snippet sets only switches the theme reads"
+  switches=$(sed -n 's/^ *\(--ddlc-[a-z-]*\):.*/\1/p' "$WORK/built/ddlc-still.css")
+  [[ -n "$switches" ]] || fail "ddlc-still.css sets no switch"
+  for switch in $switches; do
+    grep -qF "var($switch" "$built" || fail "ddlc-still.css sets $switch, which theme.css never reads"
+  done
 
   echo "== an untouched copy passes, so every red below is the defect's own"
   repo=$(copy_repo clean)
@@ -189,6 +196,10 @@ check_behaviour() {
   repo=$(copy_repo no-sticker-template)
   rm -f "$repo/src/stickers.css"
   expect_fail "a missing sticker template" 1 "missing" "$BASH" "$repo/generate.sh" build
+
+  repo=$(copy_repo no-still-template)
+  rm -f "$repo/src/still.css"
+  expect_fail "a missing still template" 1 "missing" "$BASH" "$repo/generate.sh" build
 
   echo "== a request it cannot serve is a usage error, not a finding"
   expect_fail "an unknown subcommand" 2 "no such subcommand" "$BASH" ./generate.sh bogus

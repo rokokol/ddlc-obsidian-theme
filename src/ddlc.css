@@ -121,7 +121,8 @@ body {
 
 /* the menu's paper: dots on the half-step grid, drifting one tile at a time.
    The drift moves a layer by transform, so the compositor shifts it without
-   repainting the note under it */
+   repainting the note under it. It still keeps the window drawing a frame on
+   every refresh, so the ddlc-still snippet stops it by --ddlc-drift-play */
 .workspace-leaf-content[data-type="markdown"] .view-content {
   position: relative;
   overflow: hidden;
@@ -140,6 +141,7 @@ body {
     radial-gradient(circle var(--ddlc-dot-r) at 75% 75%, var(--ddlc-dots) calc(100% - 1px), transparent 100%);
   background-size: var(--ddlc-tile) var(--ddlc-tile);
   animation: ddlc-drift 8s linear infinite;
+  animation-play-state: var(--ddlc-drift-play, running);
 }
 
 @keyframes ddlc-drift {

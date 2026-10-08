@@ -1,0 +1,6 @@
+/* The polka dots of the DDLC theme stand still. The drift keeps the window drawing a
+   frame on every screen refresh, which costs power on a laptop. Where the dots stand,
+   the theme names the rule; this snippet only sets the switch it reads */
+body {
+  --ddlc-drift-play: paused;
+}
