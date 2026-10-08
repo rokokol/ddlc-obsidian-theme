@@ -52,7 +52,8 @@ Download `theme.css` and `manifest.json` from the [latest release](https://githu
 
 ## The club on an empty tab
 
-![Sayori, Monika, Natsuki and Yuri walking along the foot of an empty tab](docs/dokis.png)
+| ![Sayori, Monika, Natsuki and Yuri standing at the foot of an empty tab](docs/dokis.png) | ![the four girls walking apart, facing different ways, with Sayori in the middle of a hop](docs/dokis-walk.png) |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 
 An optional snippet puts the four girls at the foot of every empty tab, as on the [ddlc-sddm-theme](https://github.com/rokokol/ddlc-sddm-theme) login screen. They walk to and fro, hop now and then, and hop when the cursor touches them
 
