@@ -104,8 +104,15 @@ expect_fail() {
   echo "   caught: $name"
 }
 
+# The names a stylesheet gives its @keyframes and @property rules. One stylesheet that
+# loads later replaces such a rule of the same name in another, so the snippet's names
+# must stay apart from the theme's
+at_names() { # at_names FILE -> "keyframes NAME" and "property NAME" lines, sorted
+  sed -n -e 's/^@keyframes \([^ {]*\).*/keyframes \1/p' -e 's/^@property \([^ {]*\).*/property \1/p' "$1" | sort -u
+}
+
 check_behaviour() {
-  local repo built snippet colours slots icons stickers
+  local repo built snippet colours slots icons stickers shared
   if [[ -n "${CHECK_BASH32:-}" ]]; then
     echo "== this bash is the 3.2 under proof"
     ((BASH_VERSINFO[0] == 3)) || fail "CHECK_BASH32 is set, but this bash is $BASH_VERSION"
@@ -137,6 +144,10 @@ check_behaviour() {
   (($(grep -c -- '--ddlc-[a-z]*-sticker-[a-z]*: url("data:image/png;base64,' "$snippet") == stickers)) ||
     fail "the snippet lost a sticker frame"
   grep -q 'data:image/png' "$built" && fail "theme.css carries a sticker, which belongs to the snippet alone"
+
+  echo "== the snippet names no animation or property the theme names"
+  shared=$(comm -12 <(at_names "$built") <(at_names "$snippet"))
+  [[ -z "$shared" ]] || fail "the snippet would replace the theme's $(printf '%s' "$shared" | tr '\n' ',')"
 
   echo "== an untouched copy passes, so every red below is the defect's own"
   repo=$(copy_repo clean)

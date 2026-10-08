@@ -65,10 +65,10 @@
   background-repeat: no-repeat;
   pointer-events: auto;
   animation:
-    ddlc-drift calc(2 * var(--ddlc-leg)) infinite,
-    ddlc-face calc(2 * var(--ddlc-leg)) step-end infinite,
-    ddlc-hop 42s var(--ddlc-hop-at) infinite,
-    ddlc-pose 42s step-end var(--ddlc-hop-at) infinite;
+    ddlc-sticker-walk calc(2 * var(--ddlc-leg)) infinite,
+    ddlc-sticker-face calc(2 * var(--ddlc-leg)) step-end infinite,
+    ddlc-sticker-hop 42s var(--ddlc-hop-at) infinite,
+    ddlc-sticker-pose 42s step-end var(--ddlc-hop-at) infinite;
 }
 
 /* The login screen also hops a random girl every 6 to 15 seconds. CSS has no random, so
@@ -146,11 +146,11 @@
   .empty-state-action-list::before,
   .empty-state-title::before {
     animation:
-      ddlc-drift calc(2 * var(--ddlc-leg)) infinite,
-      ddlc-face calc(2 * var(--ddlc-leg)) step-end infinite,
-      ddlc-hop 42s var(--ddlc-hop-at) infinite,
-      ddlc-pose 42s step-end var(--ddlc-hop-at) infinite,
-      ddlc-jump 670ms;
+      ddlc-sticker-walk calc(2 * var(--ddlc-leg)) infinite,
+      ddlc-sticker-face calc(2 * var(--ddlc-leg)) step-end infinite,
+      ddlc-sticker-hop 42s var(--ddlc-hop-at) infinite,
+      ddlc-sticker-pose 42s step-end var(--ddlc-hop-at) infinite,
+      ddlc-sticker-jump 670ms;
   }
 }
 
@@ -159,7 +159,7 @@
    as it is now. A translate can run on the compositor, which keeps the lengths it took
    when the animation started, so a resized tab could leave a girl on her old path
    until a hover or a hop made her jump to the new one */
-@keyframes ddlc-drift {
+@keyframes ddlc-sticker-walk {
   0% {
     margin-left: 0;
     animation-timing-function: cubic-bezier(0.3642, 0, 0.6358, 1);
@@ -172,7 +172,7 @@
 }
 
 /* The stickers face left, so a girl is mirrored exactly while she walks right */
-@keyframes ddlc-face {
+@keyframes ddlc-sticker-face {
   0% { scale: -1 1; }
   50%, 100% { scale: 1 1; }
 }
@@ -180,7 +180,7 @@
 /* A hop takes 670ms. It rises 42px in 190ms with OutQuad, which this curve draws
    exactly. It falls back in 480ms with OutBounce, sampled along its arcs. The idle hop
    lives in a 42s round, so its keyframes sit at 0.4524% and 1.5952% of it */
-@keyframes ddlc-hop {
+@keyframes ddlc-sticker-hop {
   0% {
     background-position-y: bottom 0px;
     animation-timing-function: cubic-bezier(0.3333, 0.6667, 0.6667, 1);
@@ -194,7 +194,7 @@
 
 /* The same hop on hover, as a whole animation of its own: the rise ends at 190/670.
    It keeps her excited to the end of a hop the cursor left early */
-@keyframes ddlc-jump {
+@keyframes ddlc-sticker-jump {
   0% {
     --ddlc-frame: var(--ddlc-excited);
     background-position-y: bottom 0px;
@@ -213,8 +213,8 @@
 /* A girl wears her excited pose exactly while she hops by herself. The pose goes
    through a variable, because Chromium blends two background images while it animates
    between them, and a variable flips at once. Hovering sets the picture itself, so the
-   animated variable does not override it, and ddlc-jump, later in the list, does */
-@keyframes ddlc-pose {
+   animated variable does not override it, and ddlc-sticker-jump, later in the list, does */
+@keyframes ddlc-sticker-pose {
   0% { --ddlc-frame: var(--ddlc-excited); }
   1.5952%, 100% { --ddlc-frame: var(--ddlc-calm); }
 }
