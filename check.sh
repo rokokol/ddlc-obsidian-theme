@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Needs bash 3.2 and POSIX tools only for its own code, so behaviour mode runs unchanged
 # under the bash a macOS runner has; the lint half calls actionlint, shellcheck, shfmt, jq,
-# statix, deadnix and nixfmt, which come from the flake's dev shell and never from the
+# statix, deadnix, nixfmt and magick, which come from the flake's dev shell and never from the
 # runner's PATH. check-sh.sh holds this list to the calls below.
 # The vendored checkers are run, never tested here: their logic lives at their sources
 set -euo pipefail
@@ -42,7 +42,7 @@ cd "$HERE"
 
 # One source of truth for what this repository's own shell code is; the vendored
 # scripts are checked at their sources
-scripts=(generate.sh check.sh)
+scripts=(generate.sh check.sh cover.sh)
 
 WORK=$(mktemp -d "${TMPDIR:-/tmp}/ddlc-check.XXXXXX")
 trap 'rm -rf "$WORK"' EXIT
@@ -57,7 +57,7 @@ checker() {
 
 check_lint() {
   local tool missing=() version
-  for tool in actionlint shellcheck shfmt jq statix deadnix nixfmt; do
+  for tool in actionlint shellcheck shfmt jq statix deadnix nixfmt magick; do
     command -v "$tool" >/dev/null || missing+=("$tool")
   done
   ((${#missing[@]} == 0)) ||
@@ -67,6 +67,7 @@ check_lint() {
   shellcheck "${scripts[@]}"
   shfmt -d -i 2 -ci "${scripts[@]}"
   checker generate.sh
+  checker cover.sh
   CHECK_SH_NESTED=1 checker check.sh
 
   echo "== the workflows parse, and take their tools from the lock"
@@ -84,6 +85,32 @@ check_lint() {
   version=$(jq -er .version manifest.json) || fail "manifest.json has no version"
   grep -qF "## [$version] - " CHANGELOG.md ||
     fail "manifest.json says $version but CHANGELOG.md has no ## [$version] heading"
+
+  echo "== the cover puts light above the diagonal, dark below it, and Monika in the corner"
+  check_cover
+}
+
+# Two flat shots in colours the theme never uses make every part of the cover traceable
+# to its source: a pixel is light, dark, or the sticker
+source_at() { # source_at IMAGE X,Y -> 1 for the light shot, 2 for the dark one, 0 for neither
+  magick "$1" -format "%[fx:p{$2}.r>0.9 ? 1 : (p{$2}.b>0.9 ? 2 : 0)]" info:
+}
+
+check_cover() {
+  local out="$WORK/cover"
+  mkdir -p "$out"
+  magick -size 1919x1080 xc:'rgb(250,10,10)' "$out/light.png"
+  magick -size 1919x1080 xc:'rgb(10,10,250)' "$out/dark.png"
+  "$BASH" ./cover.sh build -c "$out/cover.png" -s "$out/shot.png" "$out/light.png" "$out/dark.png"
+  [[ $(magick identify -format '%wx%h' "$out/cover.png") == 1280x720 ]] || fail "the cover is not 1280x720"
+  [[ $(magick identify -format '%wx%h' "$out/shot.png") == 512x288 ]] || fail "the catalog shot is not 512x288"
+  [[ $(source_at "$out/cover.png" 1200,40) == 1 ]] || fail "the top right corner of the cover is not the light shot"
+  [[ $(source_at "$out/cover.png" 700,650) == 2 ]] || fail "the foot of the cover is not the dark shot"
+  [[ $(magick "$out/cover.png" -crop 320x320+0+400 -format '%[fx:maxima.g>0.9]' info:) == 1 ]] ||
+    fail "the bottom left corner has no sticker in it"
+  expect_fail "a shot that does not exist" 1 "no such shot" \
+    "$BASH" ./cover.sh build -c "$out/c.png" -s "$out/s.png" "$out/light.png" "$out/none.png"
+  expect_fail "one shot instead of two" 2 "two shots" "$BASH" ./cover.sh build "$out/light.png"
 }
 
 # A throwaway copy of what the generator reads, so a planted defect never touches the tree

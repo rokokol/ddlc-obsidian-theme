@@ -19,6 +19,7 @@
           packages = with pkgs; [
             actionlint
             deadnix
+            imagemagick
             jq
             nixfmt
             shellcheck

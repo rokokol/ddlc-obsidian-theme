@@ -4,3 +4,7 @@
 /ddlc-still.css
 # nix build output
 /result
+# the sample vault gets the theme from a build, and Obsidian rewrites its own layout
+/docs/sample-vault/.obsidian/themes/
+/docs/sample-vault/.obsidian/snippets/
+/docs/sample-vault/.obsidian/workspace*.json

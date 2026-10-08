@@ -18,9 +18,9 @@ The following official artwork is bundled:
 | Path | What |
 | --- | --- |
 | `assets/*-sticker-calm.png`, `assets/*-sticker-excited.png` | the four chibi stickers in their calm and excited poses, copied unchanged from `theme/assets/` in [ddlc-sddm-theme](https://github.com/rokokol/ddlc-sddm-theme), which documents where they come from. `generate.sh` embeds them in `ddlc-stickers.css`, the optional snippet a release carries; `theme.css` carries none of them |
-| `docs/cover.png`, `screenshot.png` | the chibi Monika in the corner is `images/sticker_m.png` from [ddlc.moe](https://ddlc.moe/), scaled up. The rest of the image is screenshots of this theme |
+| `docs/cover.png`, `screenshot.png` | the chibi Monika in the corner is `assets/monika-sticker-calm.png`, scaled up by `cover.sh`. The rest of the image is screenshots of this theme |
 
-The other images in `docs/` are screenshots of this theme in my own Obsidian
+The other images in `docs/` are screenshots of this theme in my own Obsidian, most of them of the notes in `docs/sample-vault/`, which are mine
 
 The `Doki` font family is Team Salvato's and is **not** shipped here. The theme asks for it by name, so headings use it only where it is already installed
 
