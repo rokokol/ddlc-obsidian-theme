@@ -187,9 +187,8 @@ body {
     calc(var(--ddlc-sheet-pad) * 0.25) calc(var(--ddlc-sheet-pad) * 0.25) 0 calc(var(--ddlc-sheet-pad) + 2px) var(--ddlc-sheet-edge);
 }
 
-/* the sheet's rules: one under every visual line, a block at a time, so the
-   period follows each block's own line height; 1lh is that height */
-.markdown-rendered p,
+/* the sheet's rules: one along the foot of a heading and of a whole list item. Prose
+   has none, since a rule under every line of a paragraph made dense text hard to read */
 .markdown-rendered li,
 .markdown-rendered h1,
 .markdown-rendered h2,
@@ -197,20 +196,25 @@ body {
 .markdown-rendered h4,
 .markdown-rendered h5,
 .markdown-rendered h6,
-.markdown-source-view.mod-cm6 .cm-line:not(.HyperMD-codeblock):not(.HyperMD-table-row) {
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header:not(.HyperMD-codeblock):not(.HyperMD-table-row),
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-list-line:not(.HyperMD-codeblock):not(.HyperMD-table-row) {
   background-image: linear-gradient(to bottom, transparent calc(100% - 1px), var(--ddlc-rule-line) calc(100% - 1px));
-  background-size: 100% 1lh;
 }
 
-/* In Live Preview a heading line carries a top padding, and the rule's period
-   starts above it, so 1lh would rule through the letters; a heading line takes
-   one rule along its foot instead */
-.markdown-source-view.mod-cm6 .cm-line.HyperMD-header:not(.HyperMD-codeblock):not(.HyperMD-table-row) {
-  background-size: 100% 100%;
+/* An item with a nested list ends where its last nested item does, so its own rule
+   would double that item's and leave its own text bare. The rule moves to the head of
+   the nested list instead, right under the item's text, as Live Preview rules it */
+.markdown-rendered li:has(> :is(ul, ol)) {
+  background-image: none;
 }
 
-/* a pop-up, a pinned note and a table are not written on the sheet */
-.markdown-rendered .callout p,
+.markdown-rendered li > :is(ul, ol) {
+  background-image: linear-gradient(var(--ddlc-rule-line) 1px, transparent 1px);
+}
+
+/* a pop-up and a pinned note are not written on the sheet */
+.markdown-rendered .callout li > :is(ul, ol),
+.markdown-rendered blockquote li > :is(ul, ol),
 .markdown-rendered .callout li,
 .markdown-rendered .callout h1,
 .markdown-rendered .callout h2,
@@ -218,16 +222,13 @@ body {
 .markdown-rendered .callout h4,
 .markdown-rendered .callout h5,
 .markdown-rendered .callout h6,
-.markdown-rendered blockquote p,
-.markdown-rendered blockquote li,
-.markdown-rendered table p {
+.markdown-rendered blockquote li {
   background-image: none;
 }
 
-/* Live Preview rows that are not written on: a quote row and the divider row.
-   The chain of :not() matches the ruling rule's weight, so these win by order */
-.markdown-source-view.mod-cm6 .cm-line.HyperMD-quote:not(.HyperMD-codeblock):not(.HyperMD-table-row),
-.markdown-source-view.mod-cm6 .cm-line.hr:not(.HyperMD-codeblock):not(.HyperMD-table-row) {
+/* A Live Preview quote row is not written on, a list or a heading in it neither.
+   The chain of :not() matches the ruling rule's weight, so this wins by order */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-quote:not(.HyperMD-codeblock):not(.HyperMD-table-row) {
   background-image: none;
 }
 
