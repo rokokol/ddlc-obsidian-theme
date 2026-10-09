@@ -329,6 +329,23 @@ body {
   text-decoration-color: var(--ddlc-plum);
 }
 
+/* A formula in the lettering has no outline of its own: the stroke closes up its
+   thin strokes, indices and fraction bars. It takes whichever of the lettering's two
+   colours stands out from the sheet: the outline on paper, the white fill on ink */
+:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title) mjx-container {
+  color: var(--ddlc-outline);
+  -webkit-text-stroke: 0;
+}
+
+.theme-dark :is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title) mjx-container {
+  color: var(--ddlc-paper);
+}
+
+.callout-title-inner mjx-container {
+  color: var(--ddlc-plum);
+  -webkit-text-stroke: 0;
+}
+
 .markdown-rendered h3,
 .markdown-rendered h4,
 .markdown-rendered h5,
@@ -373,6 +390,9 @@ body {
   --callout-radius: 0;
   border: 6px solid var(--ddlc-popup-frame);
   background-color: var(--ddlc-popup-ground);
+  /* Obsidian blends a callout into what lies under it. The pop-up is opaque, and a
+     nested one blended into its parent's pale ground turns its white letters pink */
+  mix-blend-mode: normal;
   overflow: visible;
   position: relative;
   text-align: center;
@@ -530,6 +550,22 @@ body {
   --ddlc-sticker-dy: 0.25em;
 }
 
+/* A nested callout's sticker goes on the margin too, in the column of the outermost
+   pop-up's sticker and level with its own title. The nested pop-up stops being the
+   sticker's box, so the right offset counts from the outermost frame, and the top
+   stays at the title, where the sticker would stand in flow. The box also lies
+   outside the parent's content, which scrolls and would clip the sticker */
+@container ddlc-page not ((width < 960px) or style(--ddlc-no-margin: 1)) {
+  .callout .callout {
+    position: static;
+  }
+
+  .callout .callout > .callout-title > .callout-icon {
+    top: auto;
+    margin-top: calc(var(--ddlc-sticker-dy) - 0.3em);
+  }
+}
+
 /* Where the margin is too narrow for the sticker, it sits across the frame's top
    left corner. A container query cannot read --file-line-width, so the width is
    Obsidian's default line of 700px and the reach of the widest sticker on both
@@ -553,6 +589,12 @@ body {
     right: auto;
     left: calc(-6px - 1.1em - var(--ddlc-sticker-dx));
     top: calc(-6px - 0.7em + var(--ddlc-sticker-dy));
+  }
+
+  /* A nested sticker has only its parent's padding to stand on, since the parent's
+     content scrolls and clips the rest, so it drops the sideways shift */
+  .callout .callout > .callout-title > .callout-icon {
+    left: calc(-6px - 1.1em);
   }
 
   /* the sticker lies over the title's start, so a title that runs the full width

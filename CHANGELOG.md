@@ -19,6 +19,9 @@ All notable changes to this theme are documented in this file. The format follow
 
 ### Fixed
 
+- A nested callout has its sticker on the margin, in the column of its parent's sticker. Before, the parent's content cut the sticker off, and in a narrow window it cut some of them in half
+- A nested callout's title is white inside its outline, as the parent's is. Before, it blended into the parent's pale ground and looked faded
+- A formula in a large heading or in a callout's title is drawn plain in the lettering's colour. Before, the outline closed up its thin strokes and indices
 - A bold word in a heading or in code keeps its letters clean. Before, the browser thickened the one-weight Doki and Departure Mono itself and smeared them
 
 ## [0.4.0] - 2026-10-09
