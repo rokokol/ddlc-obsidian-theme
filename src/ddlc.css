@@ -169,13 +169,13 @@ body {
 .theme-light {
   --ddlc-sheet: var(--ddlc-paper);
   --ddlc-sheet-edge: var(--ddlc-blush);
-  --ddlc-rule-line: color-mix(in srgb, var(--ddlc-rule) 22%, transparent);
+  --ddlc-rule-line: color-mix(in srgb, var(--ddlc-rule) 22%, var(--ddlc-sheet));
 }
 
 .theme-dark {
   --ddlc-sheet: color-mix(in srgb, var(--ddlc-yuri) 18%, var(--ddlc-ink));
   --ddlc-sheet-edge: var(--ddlc-yuri);
-  --ddlc-rule-line: color-mix(in srgb, var(--ddlc-rule) 35%, transparent);
+  --ddlc-rule-line: color-mix(in srgb, var(--ddlc-rule) 35%, var(--ddlc-sheet));
 }
 
 .markdown-preview-sizer,
@@ -202,12 +202,9 @@ body {
 }
 
 /* An item with a nested list ends where its last nested item does, so its own rule
-   would double that item's and leave its own text bare. The rule moves to the head of
-   the nested list instead, right under the item's text, as Live Preview rules it */
-.markdown-rendered li:has(> :is(ul, ol)) {
-  background-image: none;
-}
-
+   would leave its own text bare. A rule at the head of the nested list stands right
+   under that text, as Live Preview rules it. The item's own rule lies on the last
+   nested item's, and the rule is opaque, mixed with the sheet, so the two read as one */
 .markdown-rendered li > :is(ul, ol) {
   background-image: linear-gradient(var(--ddlc-rule-line) 1px, transparent 1px);
 }
@@ -332,16 +329,16 @@ body {
 /* A formula in the lettering has no outline of its own: the stroke closes up its
    thin strokes, indices and fraction bars. It takes whichever of the lettering's two
    colours stands out from the sheet: the outline on paper, the white fill on ink */
-:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title) mjx-container {
+:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title) .MathJax {
   color: var(--ddlc-outline);
   -webkit-text-stroke: 0;
 }
 
-.theme-dark :is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title) mjx-container {
+.theme-dark :is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title) .MathJax {
   color: var(--ddlc-paper);
 }
 
-.callout-title-inner mjx-container {
+.callout-title-inner .MathJax {
   color: var(--ddlc-plum);
   -webkit-text-stroke: 0;
 }
