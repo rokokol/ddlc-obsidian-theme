@@ -46,6 +46,13 @@ Every callout type has its own sticker colour, cut and tilt. The theme adds one 
 > A radioactive source sits in a lead box
 ```
 
+## On a phone
+
+The theme works in the Obsidian app on a phone too. There is no margin there, so a callout's sticker sits on its frame
+
+| ![a club note on a phone, light variant](docs/phone-light.png) | ![callouts on a phone, dark variant](docs/phone-dark.png) |
+| -------------------------------------------------------------- | --------------------------------------------------------- |
+
 ## Install
 
 Download `theme.css` and `manifest.json` from the [latest release](https://github.com/rokokol/ddlc-obsidian-theme/releases/latest) into `.obsidian/themes/DDLC/` inside your vault, then pick **DDLC** under **Settings → Appearance → Themes**

@@ -518,6 +518,12 @@ body {
     left: calc(-6px - 1.1em - var(--ddlc-sticker-dx));
     top: calc(-6px - 0.7em + var(--ddlc-sticker-dy));
   }
+
+  /* the sticker lies over the title's start, so a title that runs the full width
+     keeps clear of it on both sides and stays centred */
+  .callout > .callout-title {
+    padding-inline: 2.6em;
+  }
 }
 
 /* on the dark sheet the pale pop-up writes in ink; plum alone is 3.4:1 on dot,

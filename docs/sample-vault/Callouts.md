@@ -1,5 +1,3 @@
-# Callouts
-
 > [!note] Monika
 > Just Monika. A callout is the game's pop-up, and its kind is the sticker beside it
 
