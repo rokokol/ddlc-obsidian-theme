@@ -2,6 +2,12 @@
 
 All notable changes to this theme are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the theme uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## Unreleased
+
+### Changed
+
+- A callout's title has a slightly thicker outline again, so its letters read as the game's button, while a long title still does not close up
+
 ## [1.0.0] - 2026-10-09
 
 ### Added

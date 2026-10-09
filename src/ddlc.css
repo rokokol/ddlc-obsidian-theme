@@ -652,9 +652,9 @@ body {
 .callout-title-inner {
   color: var(--ddlc-paper);
   font-weight: 400;
-  /* as thin as a heading's outline, and with air between lines, so a title of
+  /* thinner than the button's own, and with air between lines, so a title of
      several lines does not close up into one block */
-  -webkit-text-stroke: 0.14em var(--ddlc-plum);
+  -webkit-text-stroke: 0.17em var(--ddlc-plum);
   paint-order: stroke fill;
   letter-spacing: 0.03em;
   line-height: 1.45;
