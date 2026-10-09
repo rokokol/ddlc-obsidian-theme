@@ -79,6 +79,10 @@ It is a snippet and not a part of the theme for these reasons:
 
 The drifting dots keep Obsidian drawing a new frame on every screen refresh while a note is on screen, which costs some battery on a laptop. The optional `ddlc-still.css` snippet from the same [release](https://github.com/rokokol/ddlc-obsidian-theme/releases/latest) stops the drift and leaves the dots in place. Install it the same way as the stickers. It has an effect only with the DDLC theme
 
+## Icons in code
+
+A prompt, a file tree or a status line copied from a terminal often holds [Nerd Fonts](https://www.nerdfonts.com) icons, which an ordinary font shows as empty boxes. The optional `ddlc-nerd.css` snippet from the same [release](https://github.com/rokokol/ddlc-obsidian-theme/releases/latest) draws code in Departure Mono with the Nerd Fonts icons. It carries the font itself, so the icons show on a phone too. Install it the same way as the stickers. It works with the DDLC theme and with any other, and a font you choose for code in Obsidian's settings still takes its place
+
 ## Build
 
 `theme.css` is generated, and each release carries one built from its own sources. Its colours and icons come from copies of other repositories kept in `vendor/`, and only `src/ddlc.css` is written by hand

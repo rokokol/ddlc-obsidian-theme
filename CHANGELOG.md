@@ -7,6 +7,7 @@ All notable changes to this theme are documented in this file. The format follow
 ### Added
 
 - The theme carries its own fonts, so they need no installing, on a phone too: Nunito for prose and Departure Mono for code, both under the SIL Open Font License
+- `ddlc-nerd.css`, an optional snippet in each release that draws code in Departure Mono with the Nerd Fonts icons. It carries the font, and it works with any theme
 
 ### Changed
 

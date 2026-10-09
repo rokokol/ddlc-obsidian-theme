@@ -2,6 +2,7 @@
 /theme.css
 /ddlc-stickers.css
 /ddlc-still.css
+/ddlc-nerd.css
 # nix build output
 /result
 # the sample vault gets the theme from a build, and Obsidian rewrites its own layout

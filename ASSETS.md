@@ -32,8 +32,9 @@ Team Salvato reserves the right to act on copyright or trademark infringement; n
 | --- | --- | --- | --- |
 | `vendor/fonts/Nunito.woff2`, `vendor/fonts/Nunito-Italic.woff2` | [Nunito](https://github.com/googlefonts/nunito) | The Nunito Project Authors | [SIL OFL 1.1](vendor/fonts/Nunito-LICENSE.txt) |
 | `vendor/fonts/DepartureMono-Regular.woff2` | [Departure Mono](https://github.com/rektdeckard/departure-mono) | Helena Zhang | [SIL OFL 1.1](vendor/fonts/DepartureMono-LICENSE.txt) |
+| `vendor/nerd/DepartureMonoNerdFontMono-Regular.woff2` | Departure Mono patched by [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) with their icon sets | Helena Zhang; the icon sets' authors | the font under [SIL OFL 1.1](vendor/nerd/DepartureMonoNerdFont-LICENSE.txt), each icon set under the licence the [Nerd Fonts README](vendor/nerd/DepartureMonoNerdFont-README.md) names |
 
-The copies come from [ddlc-themes](https://github.com/rokokol/ddlc-themes), which takes them from their sources and packs Nunito into WOFF2 without changing a glyph. `generate.sh` embeds them in `theme.css` under the names `DDLC Nunito` and `DDLC Departure Mono`, and `theme.css` carries both licences in its header
+The copies come from [ddlc-themes](https://github.com/rokokol/ddlc-themes), which takes them from their sources and packs them into WOFF2 without changing a glyph. `generate.sh` embeds Nunito and Departure Mono in `theme.css` under the names `DDLC Nunito` and `DDLC Departure Mono`, and `theme.css` carries both licences in its header. It embeds the Nerd Fonts face in `ddlc-nerd.css` alone, the optional snippet a release carries, under the name `DDLC Departure Mono Nerd`, and the snippet carries its licence and the Nerd Fonts README in its header
 
 The headings name `Doki`, a font by 538Fonts from 2015, which is not part of the game. It is free for personal use only, so it is **not** shipped here. The theme asks for it by name, so headings use it only where it is already installed, and Nunito Black elsewhere
 

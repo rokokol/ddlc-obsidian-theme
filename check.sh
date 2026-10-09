@@ -139,7 +139,7 @@ at_names() { # at_names FILE -> "keyframes NAME" and "property NAME" lines, sort
 }
 
 check_behaviour() {
-  local repo built snippet colours slots icons roles stickers shared switches switch
+  local repo built snippet colours slots icons roles stickers shared switches switch nerd
   if [[ -n "${CHECK_BASH32:-}" ]]; then
     echo "== this bash is the 3.2 under proof"
     ((BASH_VERSINFO[0] == 3)) || fail "CHECK_BASH32 is set, but this bash is $BASH_VERSION"
@@ -190,6 +190,15 @@ check_behaviour() {
   for switch in $switches; do
     grep -qF "var($switch" "$built" || fail "ddlc-still.css sets $switch, which theme.css never reads"
   done
+
+  echo "== the Nerd snippet carries its face and every notice, and the theme carries neither"
+  nerd="$WORK/built/ddlc-nerd.css"
+  (($(grep -c 'src: url("data:font/woff2;base64,' "$nerd") == 1)) || fail "ddlc-nerd.css lost its font"
+  grep -qF 'font-family: "DDLC Departure Mono Nerd"' "$nerd" || fail "ddlc-nerd.css declares no face of its name"
+  grep -qF -- '--font-monospace-theme: "DDLC Departure Mono Nerd"' "$nerd" || fail "ddlc-nerd.css draws code in another face"
+  grep -qF "$(sed -n 1p vendor/nerd/DepartureMonoNerdFont-LICENSE.txt)" "$nerd" || fail "ddlc-nerd.css lost the font's licence"
+  grep -qF '## Icon sets' "$nerd" || fail "ddlc-nerd.css lost the icon sets' licences"
+  grep -q 'Nerd' "$built" && fail "theme.css carries the Nerd face, which belongs to the snippet alone"
 
   echo "== an untouched copy passes, so every red below is the defect's own"
   repo=$(copy_repo clean)
@@ -247,6 +256,22 @@ check_behaviour() {
   repo=$(copy_repo no-still-template)
   rm -f "$repo/src/still.css"
   expect_fail "a missing still template" 1 "missing" "$BASH" "$repo/generate.sh" build
+
+  repo=$(copy_repo no-nerd-template)
+  rm -f "$repo/src/nerd.css"
+  expect_fail "a missing Nerd template" 1 "missing" "$BASH" "$repo/generate.sh" build
+
+  repo=$(copy_repo no-nerd-font)
+  rm -f "$repo/vendor/nerd/DepartureMonoNerdFontMono-Regular.woff2"
+  expect_fail "a missing Nerd font" 1 "missing" "$BASH" "$repo/generate.sh" build
+
+  repo=$(copy_repo no-nerd-readme)
+  rm -f "$repo/vendor/nerd/DepartureMonoNerdFont-README.md"
+  expect_fail "a missing icon licence table" 1 "missing" "$BASH" "$repo/generate.sh" build
+
+  repo=$(copy_repo nerd-readme-closes)
+  printf 'a stray */ here\n' >>"$repo/vendor/nerd/DepartureMonoNerdFont-README.md"
+  expect_fail "an icon licence table that would close its comment" 1 "cannot sit in a comment" "$BASH" "$repo/generate.sh" build
 
   echo "== a request it cannot serve is a usage error, not a finding"
   expect_fail "an unknown subcommand" 2 "no such subcommand" "$BASH" ./generate.sh bogus

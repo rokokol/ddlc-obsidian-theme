@@ -4,8 +4,8 @@ name: release
 # manifest.json, taking theme.css and manifest.json from its assets. A pushed tag
 # x.y.z, with no v, is checked against the manifest, run through build.yml, and released
 # with a theme.css built from that tag's own sources and the changelog's section as notes.
-# The release also carries ddlc-stickers.css and ddlc-still.css, the optional snippets,
-# which Obsidian ignores and a person installs by hand
+# The release also carries ddlc-stickers.css, ddlc-still.css and ddlc-nerd.css, the
+# optional snippets, which Obsidian ignores and a person installs by hand
 on:
   push:
     tags: ["[0-9]+.[0-9]+.[0-9]+"]
@@ -40,7 +40,7 @@ jobs:
             exit 1
           }
 
-      - name: build the theme and the snippet from this tag
+      - name: build the theme and the snippets from this tag
         run: ./generate.sh build
 
       # The notes are the changelog's section for this version: from its heading to the
@@ -64,4 +64,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.ref_name }}
-        run: gh release create "$TAG" theme.css manifest.json ddlc-stickers.css ddlc-still.css --title "$TAG" --notes-file notes.md --verify-tag
+        run: gh release create "$TAG" theme.css manifest.json ddlc-stickers.css ddlc-still.css ddlc-nerd.css --title "$TAG" --notes-file notes.md --verify-tag

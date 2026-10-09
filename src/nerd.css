@@ -1,0 +1,10 @@
+/* Code in Departure Mono with the Nerd Fonts icons, so a prompt, a file tree or a status
+   line pasted into a note shows its icons. Obsidian draws code in --font-monospace-theme,
+   which a theme sets on the body. This snippet loads after the theme, and the variant
+   classes lift it over a theme that sets the face per variant. A face chosen in
+   Obsidian's settings still comes first */
+body,
+body.theme-light,
+body.theme-dark {
+  --font-monospace-theme: "DDLC Departure Mono Nerd", ui-monospace, monospace;
+}
