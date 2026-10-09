@@ -26,7 +26,7 @@ def poem(member: str) -> str:
 
 ---
 
-### **After the festival** [[Образец]]
+### **After the festival** [[Sample]]
 
 Just Monika. Just Monika. 
 Just Monika. 
