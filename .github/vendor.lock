@@ -33,7 +33,7 @@ check-nix.sh rokokol/nix-best-practices-skill check-nix.sh bb5c1614c27476b43d962
 check-changelog.sh rokokol/versioning-skill check-changelog.sh b13ab46e2fb6dc6800b799b720849e02143ff345 103e3395a394fe6d39b8d7e0989107d9aa01c2e8
 vendor/lucide/LICENSE lucide-icons/lucide LICENSE b56741cf30c08fc7248bf41ddd3a261367aa9579 718bb3f0e44153809972abed31839375804bf652
 check-prose.sh rokokol/create-readme-skill check-prose.sh c912b7aa9584a16d57eb1d58d698d7fb1121669c 0438eca6ca155baf2b5fbbd8157747ec3619b579
-vendor/ddlc-tokens.css rokokol/ddlc-themes dist/ddlc-tokens.css ae700a7c5b98df4b92f90f533434bafde72004ee 0a293c81d66067eaebce7de510df42ee1e8b5fe0
+vendor/ddlc-tokens.css rokokol/ddlc-themes dist/ddlc-tokens.css 55b454bcc3a26e0ad725015c7658aa6fb0e8df2b b3b35e0d5ae0aa04743fff25168d3c874ab95a3a
 vendor/fonts/Nunito.woff2 rokokol/ddlc-themes dist/Nunito.woff2 db1f8d620306c281861703235622047e92801180 0d674561a26e9b3eb3808fda82df4b6129c0f511
 vendor/fonts/Nunito-Italic.woff2 rokokol/ddlc-themes dist/Nunito-Italic.woff2 db1f8d620306c281861703235622047e92801180 dc82b6927bddc8c29bb7266b263563607a7f31dc
 vendor/fonts/Nunito-LICENSE.txt rokokol/ddlc-themes dist/Nunito-LICENSE.txt db1f8d620306c281861703235622047e92801180 c8210f08ca3cece05b4f7baa428afe8e1abe3293

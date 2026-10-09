@@ -67,6 +67,11 @@ body {
   --text-faint: var(--ddlc-faint);
   --text-accent: var(--ddlc-accent);
   --text-accent-hover: var(--ddlc-accent-live);
+  --link-color: var(--ddlc-link);
+  --link-color-hover: var(--ddlc-link-live);
+  --link-external-color: var(--ddlc-link);
+  --link-external-color-hover: var(--ddlc-link-live);
+  --link-unresolved-color: var(--ddlc-link);
   --text-on-accent: var(--ddlc-on-accent);
   --text-selection: var(--ddlc-selection);
   --text-highlight-bg: var(--ddlc-highlight);
