@@ -39,7 +39,8 @@ The theme is called **DDLC** inside Obsidian. Its colours come from [ddlc-palett
 
 ## Callouts
 
-![every callout type as a pale pop-up, each with a sticker of its colour on the margin](docs/callouts.png)
+| ![every callout type as a pale pop-up on the dark sheet, each with a sticker of its colour on the margin](docs/callouts.png) | ![every callout type on the light sheet](docs/callouts-light.png) |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
 
 Every callout type has its own sticker colour, cut and tilt. The theme adds one type of its own, `experiment`, with a flask icon, for an experiment or a real case in a study note:
 
