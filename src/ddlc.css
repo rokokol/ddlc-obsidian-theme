@@ -7,9 +7,6 @@
    and a translucent one is a mix with transparent */
 
 body {
-  /* ddlc.moe tilebg.png: a 200 px tile, dots of radius 40 on a half-step grid */
-  --ddlc-tile: 120px;
-  --ddlc-dot-r: calc(var(--ddlc-tile) / 5);
   --ddlc-radius: 12px;
   /* The theme's faces are Nunito for prose and Departure Mono for code, embedded above
      under names of their own, so the theme draws with its own copy. A heading is Doki
@@ -81,7 +78,6 @@ body {
 }
 
 .theme-light {
-  --ddlc-dots: var(--ddlc-dot);
   --ddlc-outline: var(--ddlc-plum);
 
   --background-primary: var(--ddlc-paper);
@@ -103,7 +99,6 @@ body {
 }
 
 .theme-dark {
-  --ddlc-dots: color-mix(in srgb, var(--ddlc-yuri-shadow) 75%, var(--ddlc-ink));
   --ddlc-outline: var(--ddlc-yuri);
 
   --background-primary: color-mix(in srgb, var(--ddlc-yuri) 18%, var(--ddlc-ink));
@@ -138,19 +133,19 @@ body {
 .workspace-leaf-content[data-type="markdown"] .view-content::before {
   content: "";
   position: absolute;
-  inset: calc(-1 * var(--ddlc-tile)) 0 0 calc(-1 * var(--ddlc-tile));
+  inset: calc(-1 * var(--ddlc-polka-tile)) 0 0 calc(-1 * var(--ddlc-polka-tile));
   z-index: -1;
   pointer-events: none;
   background-image:
-    radial-gradient(circle var(--ddlc-dot-r) at 25% 25%, var(--ddlc-dots) calc(100% - 1px), transparent 100%),
-    radial-gradient(circle var(--ddlc-dot-r) at 75% 75%, var(--ddlc-dots) calc(100% - 1px), transparent 100%);
-  background-size: var(--ddlc-tile) var(--ddlc-tile);
+    radial-gradient(circle var(--ddlc-polka-dot) at 25% 25%, var(--ddlc-dots) calc(100% - 1px), transparent 100%),
+    radial-gradient(circle var(--ddlc-polka-dot) at 75% 75%, var(--ddlc-dots) calc(100% - 1px), transparent 100%);
+  background-size: var(--ddlc-polka-tile) var(--ddlc-polka-tile);
   animation: ddlc-drift 8s linear infinite;
   animation-play-state: var(--ddlc-drift-play, running);
 }
 
 @keyframes ddlc-drift {
-  to { transform: translate(var(--ddlc-tile), var(--ddlc-tile)); }
+  to { transform: translate(var(--ddlc-polka-tile), var(--ddlc-polka-tile)); }
 }
 
 .workspace-leaf-content[data-type="markdown"] .markdown-source-view,
