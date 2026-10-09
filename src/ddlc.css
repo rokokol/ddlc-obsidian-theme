@@ -591,10 +591,18 @@ body {
     top: calc(-6px - 0.7em + var(--ddlc-sticker-dy));
   }
 
-  /* A nested sticker has only its parent's padding to stand on, since the parent's
-     content scrolls and clips the rest, so it drops the sideways shift */
+  /* A nested pop-up stands right at the edge of its parent's content, which scrolls
+     and clips whatever reaches past it. So a nested sticker lies on the corner from
+     the frame's outer edge inwards, and the pop-up stands in a little, enough for the
+     tilted strip, and low enough for the strip above it */
   .callout .callout > .callout-title > .callout-icon {
-    left: calc(-6px - 1.1em);
+    left: -6px;
+  }
+
+  .callout-content .callout,
+  .markdown-source-view.mod-cm6 .callout-content .callout {
+    margin-top: 1.6em;
+    margin-inline: 0.4em;
   }
 
   /* the sticker lies over the title's start, so a title that runs the full width
