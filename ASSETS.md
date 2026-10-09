@@ -1,6 +1,6 @@
 # Assets and third-party content
 
-`LICENSE` (MIT) covers the **code** in this repository: `src/ddlc.css`, `generate.sh`, `check.sh` and the Nix expression. It does **not** cover the colours, which are Team Salvato's, or the icons, which are Lucide's
+`LICENSE` (MIT) covers the **code** in this repository: `src/ddlc.css`, `generate.sh`, `check.sh` and the Nix expression. It does **not** cover the colours, which are Team Salvato's, the icons, which are Lucide's, or the fonts below
 
 ## Doki Doki Literature Club
 
@@ -22,11 +22,20 @@ The following official artwork is bundled:
 
 The other images in `docs/` are screenshots of this theme in my own Obsidian, most of them of the notes in `docs/sample-vault/`, which are mine
 
-The `Doki` font family is Team Salvato's and is **not** shipped here. The theme asks for it by name, so headings use it only where it is already installed
-
 Use here follows [Team Salvato's IP guidelines](https://teamsalvato.com/ip-guidelines): this is non-commercial fan content, nothing containing official assets is sold, and no claim of affiliation is made. If you reuse any of it, the same conditions apply to you
 
 Team Salvato reserves the right to act on copyright or trademark infringement; nothing here grants a licence to their intellectual property
+
+## Fonts
+
+| Path | Font | Author | Licence |
+| --- | --- | --- | --- |
+| `vendor/fonts/Nunito.woff2`, `vendor/fonts/Nunito-Italic.woff2` | [Nunito](https://github.com/googlefonts/nunito) | The Nunito Project Authors | [SIL OFL 1.1](vendor/fonts/Nunito-LICENSE.txt) |
+| `vendor/fonts/DepartureMono-Regular.woff2` | [Departure Mono](https://github.com/rektdeckard/departure-mono) | Helena Zhang | [SIL OFL 1.1](vendor/fonts/DepartureMono-LICENSE.txt) |
+
+The copies come from [ddlc-themes](https://github.com/rokokol/ddlc-themes), which takes them from their sources and packs Nunito into WOFF2 without changing a glyph. `generate.sh` embeds them in `theme.css` under the names `DDLC Nunito` and `DDLC Departure Mono`, and `theme.css` carries both licences in its header
+
+The headings name `Doki`, a font by 538Fonts from 2015, which is not part of the game. It is free for personal use only, so it is **not** shipped here. The theme asks for it by name, so headings use it only where it is already installed, and Nunito Black elsewhere
 
 ## Lucide
 

@@ -45,6 +45,8 @@ TOKENS="$HERE/vendor/ddlc-tokens.css"
 BASE16="$HERE/vendor/base16-ddlc-dark.yaml"
 ICONS="$HERE/vendor/lucide"
 ICON_LICENSE="$ICONS/LICENSE"
+# The theme's faces, from ddlc-themes: Nunito for prose, Departure Mono for code
+FONTS="$HERE/vendor/fonts"
 STICKERS="$HERE/assets"
 STICKER_TEMPLATE="$HERE/src/stickers.css"
 STILL_TEMPLATE="$HERE/src/still.css"
@@ -64,6 +66,8 @@ render() {
   printf '/* The task and copy icons are Lucide icons, https://lucide.dev\n\n'
   cat "$ICON_LICENSE"
   printf '*/\n\n'
+  render_font_notices
+  render_fonts
   # On the root, not the body: the vendored roles below are declared there and read these
   # colours, and a var() resolves on the element that declares it
   printf ':root {\n'
@@ -109,6 +113,35 @@ render_base16() {
     count=$((count + 1))
   done <"$BASE16"
   ((count == 16)) || fail "expected 16 base16 slots in $BASE16, found $count"
+}
+
+# The fonts' licences travel with the fonts embedded below, as the SIL OFL asks
+render_font_notices() {
+  local license
+  for license in "$FONTS/Nunito-LICENSE.txt" "$FONTS/DepartureMono-LICENSE.txt"; do
+    [[ -f "$license" ]] || fail "missing $license"
+    case "$(cat "$license")" in *'*/'*) fail "$license holds */ and cannot sit in a comment" ;; esac
+    printf '/* %s, embedded below\n\n' "$(basename -- "$license" -LICENSE.txt)"
+    cat "$license"
+    printf '*/\n\n'
+  done
+}
+
+# Each face as a data URI under a name of its own, so the theme draws with its own copy
+# and never with a different version a system has installed
+render_fonts() {
+  local file
+  for file in Nunito.woff2 Nunito-Italic.woff2 DepartureMono-Regular.woff2; do
+    [[ -f "$FONTS/$file" ]] || fail "missing $FONTS/$file"
+  done
+  font_face "DDLC Nunito" "200 1000" normal "$FONTS/Nunito.woff2"
+  font_face "DDLC Nunito" "200 1000" italic "$FONTS/Nunito-Italic.woff2"
+  font_face "DDLC Departure Mono" 400 normal "$FONTS/DepartureMono-Regular.woff2"
+}
+
+font_face() { # <family> <weight> <style> <woff2>
+  printf '@font-face {\n  font-family: "%s";\n  font-weight: %s;\n  font-style: %s;\n' "$1" "$2" "$3"
+  printf '  src: url("data:font/woff2;base64,%s") format("woff2");\n}\n\n' "$(base64 <"$4" | tr -d '\n')"
 }
 
 # Each vendored Lucide icon as a data URI for a mask, so the template colours it with

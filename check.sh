@@ -164,6 +164,11 @@ check_behaviour() {
   (($(grep -c -- '--ddlc-base0[[:xdigit:]]: #' "$built") == slots)) || fail "the theme lost a base16 slot"
   (($(grep -c -- '--ddlc-icon-[a-z-]*: url(' "$built") == icons)) || fail "the theme lost an icon"
   grep -qF "$(sed -n 1p vendor/lucide/LICENSE)" "$built" || fail "the theme lost the icons' licence notice"
+  (($(grep -c 'src: url("data:font/woff2;base64,' "$built") == $(find vendor/fonts -name '*.woff2' | wc -l))) ||
+    fail "the theme lost a font"
+  for license in vendor/fonts/*-LICENSE.txt; do
+    grep -qF "$(sed -n 1p "$license")" "$built" || fail "the theme lost the notice of $license"
+  done
   roles=$(grep -c -- '^ *--ddlc-[a-z0-9-]*: ' vendor/ddlc-tokens.css)
   ((roles > 0)) || fail "vendor/ddlc-tokens.css holds no role"
   grep -qF "$(grep -m1 -- '^ *--ddlc-' vendor/ddlc-tokens.css)" "$built" || fail "the theme lost the shared roles"
@@ -210,6 +215,14 @@ check_behaviour() {
   repo=$(copy_repo licence-closes-comment)
   printf 'a stray */ here\n' >>"$repo/vendor/lucide/LICENSE"
   expect_fail "an icon licence that would close its comment" 1 "cannot sit in a comment" "$BASH" "$repo/generate.sh" build
+
+  repo=$(copy_repo no-font)
+  rm -f "$repo/vendor/fonts/Nunito.woff2"
+  expect_fail "a missing font" 1 "missing" "$BASH" "$repo/generate.sh" build
+
+  repo=$(copy_repo font-licence-closes)
+  printf 'a stray */ here\n' >>"$repo/vendor/fonts/Nunito-LICENSE.txt"
+  expect_fail "a font licence that would close its comment" 1 "cannot sit in a comment" "$BASH" "$repo/generate.sh" build
 
   repo=$(copy_repo no-tokens)
   rm -f "$repo/vendor/ddlc-tokens.css"

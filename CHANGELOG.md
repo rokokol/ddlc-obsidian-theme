@@ -2,6 +2,17 @@
 
 All notable changes to this theme are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the theme uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## Unreleased
+
+### Added
+
+- The theme carries its own fonts, so they need no installing, on a phone too: Nunito for prose and Departure Mono for code, both under the SIL Open Font License
+
+### Changed
+
+- Prose is Nunito Medium, and bold is Nunito Black instead of the text's colour alone
+- A heading, a callout's title and the properties' heading are Doki where it is installed, as before, and Nunito Black otherwise
+
 ## [0.4.0] - 2026-10-09
 
 ### Added

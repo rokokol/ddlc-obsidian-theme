@@ -3,8 +3,8 @@
   "theme": "obsidian",
   "baseFontSize": 17,
   "interfaceFontFamily": "Doki,DepartureMono Nerd Font Mono",
-  "textFontFamily": "DepartureMono Nerd Font Propo,DepartureMono Nerd Font,DepartureMono Nerd Font Mono,Doki",
-  "monospaceFontFamily": "DepartureMono Nerd Font Mono,Doki Nerd Font Mono",
+  "textFontFamily": "",
+  "monospaceFontFamily": "",
   "enabledCssSnippets": [
     "ddlc-stickers"
   ],

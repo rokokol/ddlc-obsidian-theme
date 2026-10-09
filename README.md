@@ -30,8 +30,10 @@ The theme is called **DDLC** inside Obsidian. Its colours come from [ddlc-palett
 - Icons for the task states most themes share, such as `[/]`, `[!]`, `[?]` and `[b]`
 - The dark variant keeps the same club on a muted violet sheet, and the pop-ups stay pale on it
 - Motion stops when the system asks for reduced motion
+- Prose in Nunito Medium with bold in Black, and code in Departure Mono, both carried by the theme
 
-Headings use the game's `Doki` font where it is installed; the theme does not ship it, see [ASSETS.md](ASSETS.md)
+> [!NOTE]
+> Headings use `Doki`, a rounded display font by 538Fonts, where it is installed, and Nunito Black otherwise. Doki is free for personal use only, so the theme may not pass it on: install it yourself if you want it, and the theme picks it up. Nunito and Departure Mono are under the SIL Open Font License, so the theme carries them and they need no installing, on a phone too. A font you choose in Obsidian's settings still takes their place. See [ASSETS.md](ASSETS.md)
 
 ![live preview mode](docs/live_preview.png)
 
