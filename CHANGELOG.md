@@ -12,6 +12,7 @@ All notable changes to this theme are documented in this file. The format follow
 
 - Prose is Nunito Medium, and bold is Nunito Black instead of the text's colour alone
 - A heading, a callout's title and the properties' heading are Doki where it is installed, as before, and Nunito Black otherwise
+- A link on the dark sheet is a lighter pink, so it no longer looks dim beside the white text
 
 ## [0.4.0] - 2026-10-09
 
