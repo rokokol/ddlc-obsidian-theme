@@ -1,5 +1,7 @@
 > [!note] Monika
 > Just Monika. A callout is the game's pop-up, and its kind is the sticker beside it
+> > [!bug] Just Monika.
+> > OK
 
 > [!experiment] Rutherford and Marsden, 1908–1911: gold foil hardly deflects alpha particles [[Literature Club|but a few fly back]] [08:37](https://ddlc.moe)
 > A radioactive source sits in a lead box
