@@ -15,6 +15,10 @@ All notable changes to this theme are documented in this file. The format follow
 - A link on the dark sheet is a lighter pink, so it no longer looks dim beside the white text
 - The fold of `---` on the light sheet casts a faint plum shade instead of a grey one, which looked dirty on the white sheet
 
+### Fixed
+
+- A bold word in a heading or in code keeps its letters clean. Before, the browser thickened the one-weight Doki and Departure Mono itself and smeared them
+
 ## [0.4.0] - 2026-10-09
 
 ### Added

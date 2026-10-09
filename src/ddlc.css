@@ -14,12 +14,14 @@ body {
   /* The theme's faces are Nunito for prose and Departure Mono for code, embedded above
      under names of their own, so the theme draws with its own copy. A heading is Doki
      where it is installed, and Nunito Black otherwise. Prose is Medium, and bold steps
-     up to Black, Obsidian's text weight plus its bold modifier */
+     up to Black, Obsidian's text weight plus its bold modifier. Doki and Departure Mono
+     have one weight each, and a synthetic bold smears them, so no face is ever emboldened */
   --ddlc-heading-font: "Doki", "DDLC Nunito", var(--font-text);
   --font-text-theme: "DDLC Nunito", sans-serif;
   --font-monospace-theme: "DDLC Departure Mono", ui-monospace, monospace;
   --font-weight: 500;
   --bold-modifier: 400;
+  font-synthesis-weight: none;
 
   --radius-s: 6px;
   --radius-m: var(--ddlc-radius);
@@ -269,8 +271,8 @@ body {
     linear-gradient(to bottom, transparent, var(--ddlc-fold-shade) 50%, transparent);
 }
 
-/* Doki has one weight, and a synthetic bold smears it, so every heading keeps weight 400.
-   Black reaches Nunito through its weight axis, which Doki does not have */
+/* Every heading keeps weight 400, and Black reaches Nunito through its weight axis,
+   which Doki does not have */
 .markdown-rendered :is(h1, h2, h3, h4, h5, h6),
 .markdown-source-view.mod-cm6 .cm-header,
 .inline-title,
