@@ -237,7 +237,7 @@ body {
    every row's margins at 0 !important; so there the row is widened and shifted
    instead, and the rule inside it fills the row */
 .theme-light {
-  --ddlc-fold-shade: color-mix(in srgb, var(--ddlc-jacket) 22%, transparent);
+  --ddlc-fold-shade: color-mix(in srgb, var(--ddlc-plum) 15%, transparent);
   --ddlc-staple: var(--ddlc-jacket);
 }
 
