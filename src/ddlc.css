@@ -416,6 +416,17 @@ body {
   text-align: start;
 }
 
+/* An item keeps the room its marker takes on the left on the right as well, so the
+   text itself stands in the middle, not the text with its markers. CSS cannot read
+   Obsidian's indent, so both sides take one value here instead of copying it */
+.callout-content > :is(ul, ol) {
+  --ddlc-marker-room: 3ch;
+}
+
+.callout-content > :is(ul, ol) > li {
+  margin-inline: var(--ddlc-marker-room);
+}
+
 .callout-content :is(pre, .HyperMD-codeblock) {
   text-align: start;
 }

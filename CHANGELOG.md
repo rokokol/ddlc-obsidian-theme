@@ -15,6 +15,7 @@ All notable changes to this theme are documented in this file. The format follow
 - A heading, a callout's title and the properties' heading are Doki where it is installed, as before, and Nunito Black otherwise
 - A link on the dark sheet is a lighter pink, so it no longer looks dim beside the white text
 - The sheet rules a heading and a list item, one line along the foot of each, and leaves prose bare. Before, a rule under every line of a paragraph made dense text hard to read
+- A list in a callout centres by its text, not by its text with its markers
 - A callout's title has a thinner outline, as thin as a heading's, and more space between its lines, so a long title no longer closes up into one block
 - The fold of `---` on the light sheet casts a faint plum shade instead of a grey one, which looked dirty on the white sheet
 
