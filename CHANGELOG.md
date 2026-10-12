@@ -2,6 +2,13 @@
 
 All notable changes to this theme are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the theme uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [1.0.2] - 2026-10-12
+
+### Fixed
+
+- Bold text in callout titles keeps its colour without an outline, so it stays readable and distinct. Links inside bold text use that colour too
+- Tags in the mobile dark theme use the same pale background as desktop tags. Tags keep their text and background colours on hover
+
 ## [1.0.1] - 2026-10-09
 
 ### Changed
