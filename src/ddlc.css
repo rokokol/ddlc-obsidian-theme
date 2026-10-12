@@ -75,6 +75,8 @@ body {
   --text-selection: var(--ddlc-selection);
   --text-highlight-bg: var(--ddlc-highlight);
   --table-border-color: var(--ddlc-line);
+  --tag-color-hover: var(--tag-color);
+  --tag-background-hover: var(--tag-background);
 }
 
 .theme-light {
@@ -115,6 +117,10 @@ body {
   --bold-color: var(--ddlc-blush);
   --italic-color: var(--ddlc-natsuki);
   --table-header-background: color-mix(in srgb, var(--ddlc-yuri) 35%, transparent);
+}
+
+.theme-dark,
+.is-mobile.theme-dark {
   --tag-background: color-mix(in srgb, var(--ddlc-blush) 85%, transparent);
   --tag-color: var(--ddlc-yuri-shadow);
 }
@@ -650,6 +656,15 @@ body {
   paint-order: stroke fill;
   letter-spacing: 0.03em;
   line-height: 1.45;
+}
+
+.callout-title-inner :is(b, strong) {
+  --link-color: var(--bold-color);
+  --link-color-hover: var(--bold-color);
+  --link-external-color: var(--bold-color);
+  --link-external-color-hover: var(--bold-color);
+  --link-unresolved-color: var(--bold-color);
+  -webkit-text-stroke: 0;
 }
 
 /* the properties: a signboard of their own, its foot shaded like the game's
