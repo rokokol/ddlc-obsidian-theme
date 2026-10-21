@@ -10,10 +10,13 @@ body {
   --ddlc-radius: 12px;
   /* The theme's faces are Nunito for prose and Departure Mono for code, embedded above
      under names of their own, so the theme draws with its own copy. A heading is Doki
-     where it is installed, and Nunito Black otherwise. Prose is Medium, and bold steps
-     up to Black, Obsidian's text weight plus its bold modifier. Doki and Departure Mono
-     have one weight each, and a synthetic bold smears them, so no face is ever emboldened */
-  --ddlc-heading-font: "Doki", "DDLC Nunito", var(--font-text);
+     where it is installed, and the plain face, Nunito Black, otherwise; the snippet
+     ddlc-nunito-headings.css sets the heading to the plain face everywhere. Prose is
+     Medium, and bold steps up to Black, Obsidian's text weight plus its bold modifier.
+     Doki and Departure Mono have one weight each, and a synthetic bold smears them, so
+     no face is ever emboldened */
+  --ddlc-heading-plain: "DDLC Nunito", var(--font-text);
+  --ddlc-heading-font: "Doki", var(--ddlc-heading-plain);
   --font-text-theme: "DDLC Nunito", sans-serif;
   --font-monospace-theme: "DDLC Departure Mono", ui-monospace, monospace;
   --font-weight: 500;

@@ -1,0 +1,5 @@
+/* The headings of the DDLC theme are Nunito Black, also where Doki is installed. The
+   theme names the plain face beside Doki; this snippet only sets the switch it reads */
+body {
+  --ddlc-heading-font: var(--ddlc-heading-plain);
+}

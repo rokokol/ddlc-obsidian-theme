@@ -139,7 +139,7 @@ at_names() { # at_names FILE -> "keyframes NAME" and "property NAME" lines, sort
 }
 
 check_behaviour() {
-  local repo built snippet colours slots icons roles stickers shared switches switch nerd
+  local repo built snippet colours slots icons roles stickers shared names name switches switch plain nerd
   if [[ -n "${CHECK_BASH32:-}" ]]; then
     echo "== this bash is the 3.2 under proof"
     ((BASH_VERSINFO[0] == 3)) || fail "CHECK_BASH32 is set, but this bash is $BASH_VERSION"
@@ -184,12 +184,25 @@ check_behaviour() {
   shared=$(comm -12 <(at_names "$built") <(at_names "$snippet"))
   [[ -z "$shared" ]] || fail "the snippet would replace the theme's $(printf '%s' "$shared" | tr '\n' ',')"
 
-  echo "== the still snippet sets only switches the theme reads"
-  switches=$(sed -n 's/^ *\(--ddlc-[a-z-]*\):.*/\1/p' "$WORK/built/ddlc-still.css")
-  [[ -n "$switches" ]] || fail "ddlc-still.css sets no switch"
-  for switch in $switches; do
-    grep -qF "var($switch" "$built" || fail "ddlc-still.css sets $switch, which theme.css never reads"
+  # the switch snippets are the ones generate.sh names
+  names=$(sed -n 's/^switch_snippets="\(.*\)"$/\1/p' generate.sh)
+  [[ -n "$names" ]] || fail "generate.sh names no switch snippet"
+  for name in $names; do
+    echo "== the $name snippet sets only switches the theme reads"
+    switches=$(sed -n 's/^ *\(--ddlc-[a-z-]*\):.*/\1/p' "$WORK/built/ddlc-$name.css")
+    [[ -n "$switches" ]] || fail "ddlc-$name.css sets no switch"
+    for switch in $switches; do
+      grep -qF "var($switch" "$built" || fail "ddlc-$name.css sets $switch, which theme.css never reads"
+    done
   done
+
+  echo "== the Nunito headings snippet takes Doki out of the heading face, and only it"
+  grep -qF -- '--ddlc-heading-font: "Doki"' "$built" || fail "theme.css no longer puts a heading in Doki"
+  grep -qF -- '--ddlc-heading-font: var(--ddlc-heading-plain)' "$WORK/built/ddlc-nunito-headings.css" ||
+    fail "ddlc-nunito-headings.css does not draw a heading in the plain face"
+  plain=$(sed -n 's/^ *--ddlc-heading-plain:\(.*\)/\1/p' "$built")
+  grep -q '[^ ]' <<<"$plain" || fail "theme.css defines no plain heading face"
+  grep -qi doki <<<"$plain" && fail "the plain heading face still names Doki"
 
   echo "== the Nerd snippet carries its face and every notice, and the theme carries neither"
   nerd="$WORK/built/ddlc-nerd.css"
@@ -256,6 +269,10 @@ check_behaviour() {
   repo=$(copy_repo no-still-template)
   rm -f "$repo/src/still.css"
   expect_fail "a missing still template" 1 "missing" "$BASH" "$repo/generate.sh" build
+
+  repo=$(copy_repo no-nunito-headings-template)
+  rm -f "$repo/src/nunito-headings.css"
+  expect_fail "a missing Nunito headings template" 1 "missing" "$BASH" "$repo/generate.sh" build
 
   repo=$(copy_repo no-nerd-template)
   rm -f "$repo/src/nerd.css"

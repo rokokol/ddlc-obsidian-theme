@@ -2,6 +2,12 @@
 
 All notable changes to this theme are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the theme uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [Unreleased]
+
+### Added
+
+- `ddlc-nunito-headings.css`, an optional snippet in each release that draws headings in Nunito Black also where Doki is installed
+
 ## [1.0.2] - 2026-10-12
 
 ### Fixed
