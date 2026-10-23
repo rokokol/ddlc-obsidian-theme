@@ -8,6 +8,10 @@ All notable changes to this theme are documented in this file. The format follow
 
 - `ddlc-nunito-headings.css`, an optional snippet in each release that draws headings in Nunito Black also where Doki is installed
 
+### Fixed
+
+- Selected and misspelled words in outlined headings, the note title and callout titles keep their outline. Before, they lost it and were white on the light theme's paper. The wavy line under a misspelled word, red, or green for grammar, is thin and lies below the letters
+
 ## [1.0.2] - 2026-10-12
 
 ### Fixed

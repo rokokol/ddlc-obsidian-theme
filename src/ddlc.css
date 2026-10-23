@@ -300,10 +300,51 @@ body {
 .HyperMD-header-1 .cm-header-1,
 .HyperMD-header-2 .cm-header-2,
 .inline-title {
+  --ddlc-stroke: 0.14em;
+  --ddlc-stroke-color: var(--ddlc-outline);
   color: var(--ddlc-paper);
-  -webkit-text-stroke: 0.14em var(--ddlc-outline);
+  -webkit-text-stroke: var(--ddlc-stroke) var(--ddlc-stroke-color);
   paint-order: stroke fill;
   letter-spacing: 0.02em;
+}
+
+/* Chromium paints selected and misspelled text again in the highlight's own style. A
+   highlight takes no text stroke, so the white letters lost their outline and vanished
+   on the paper. A ring of shadows draws the outer half of the outline instead, since a
+   highlight takes text-shadow. Text without an outline makes its stroke transparent,
+   and its ring with it. A pseudo-element cannot stand in :is(), hence the long list */
+:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title, .callout-title-inner)::selection,
+:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title, .callout-title-inner) ::selection,
+:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title, .callout-title-inner)::spelling-error,
+:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title, .callout-title-inner) ::spelling-error,
+:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title, .callout-title-inner)::grammar-error,
+:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title, .callout-title-inner) ::grammar-error {
+  --ddlc-ring: calc(var(--ddlc-stroke) / 2);
+  --ddlc-ring-diagonal: calc(var(--ddlc-ring) * 0.71);
+  text-shadow:
+    var(--ddlc-ring) 0 var(--ddlc-stroke-color),
+    calc(-1 * var(--ddlc-ring)) 0 var(--ddlc-stroke-color),
+    0 var(--ddlc-ring) var(--ddlc-stroke-color),
+    0 calc(-1 * var(--ddlc-ring)) var(--ddlc-stroke-color),
+    var(--ddlc-ring-diagonal) var(--ddlc-ring-diagonal) var(--ddlc-stroke-color),
+    calc(-1 * var(--ddlc-ring-diagonal)) var(--ddlc-ring-diagonal) var(--ddlc-stroke-color),
+    var(--ddlc-ring-diagonal) calc(-1 * var(--ddlc-ring-diagonal)) var(--ddlc-stroke-color),
+    calc(-1 * var(--ddlc-ring-diagonal)) calc(-1 * var(--ddlc-ring-diagonal)) var(--ddlc-stroke-color);
+}
+
+/* The ring copies the underline of an error as well. The browser's own wavy line lies
+   against the letters, and its copies close up into a thick band with them. A thin line
+   at a distance keeps its own outline and reads as one line */
+:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title, .callout-title-inner)::spelling-error,
+:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title, .callout-title-inner) ::spelling-error {
+  text-decoration: underline wavy var(--color-red) 1px;
+  text-underline-offset: 0.3em;
+}
+
+:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title, .callout-title-inner)::grammar-error,
+:is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title, .callout-title-inner) ::grammar-error {
+  text-decoration: underline wavy var(--color-green) 1px;
+  text-underline-offset: 0.3em;
 }
 
 /* A link in the lettering keeps its white fill. The link colour is the outline's
@@ -334,8 +375,9 @@ body {
    thin strokes, indices and fraction bars. It takes whichever of the lettering's two
    colours stands out from the sheet: the outline on paper, the white fill on ink */
 :is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title) .MathJax {
+  --ddlc-stroke-color: transparent;
   color: var(--ddlc-outline);
-  -webkit-text-stroke: 0;
+  -webkit-text-stroke-color: var(--ddlc-stroke-color);
 }
 
 .theme-dark :is(.markdown-rendered :is(h1, h2), .HyperMD-header-1, .HyperMD-header-2, .inline-title) .MathJax {
@@ -343,8 +385,9 @@ body {
 }
 
 .callout-title-inner .MathJax {
+  --ddlc-stroke-color: transparent;
   color: var(--ddlc-plum);
-  -webkit-text-stroke: 0;
+  -webkit-text-stroke-color: var(--ddlc-stroke-color);
 }
 
 .markdown-rendered h3,
@@ -655,7 +698,9 @@ body {
   font-weight: 400;
   /* thinner than the button's own, and with air between lines, so a title of
      several lines does not close up into one block */
-  -webkit-text-stroke: 0.17em var(--ddlc-plum);
+  --ddlc-stroke: 0.17em;
+  --ddlc-stroke-color: var(--ddlc-plum);
+  -webkit-text-stroke: var(--ddlc-stroke) var(--ddlc-stroke-color);
   paint-order: stroke fill;
   letter-spacing: 0.03em;
   line-height: 1.45;
@@ -667,7 +712,8 @@ body {
   --link-external-color: var(--bold-color);
   --link-external-color-hover: var(--bold-color);
   --link-unresolved-color: var(--bold-color);
-  -webkit-text-stroke: 0;
+  --ddlc-stroke-color: transparent;
+  -webkit-text-stroke-color: var(--ddlc-stroke-color);
 }
 
 /* the properties: a signboard of their own, its foot shaded like the game's
