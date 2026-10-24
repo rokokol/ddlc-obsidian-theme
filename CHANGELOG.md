@@ -4,6 +4,8 @@ All notable changes to this theme are documented in this file. The format follow
 
 ## [Unreleased]
 
+## [1.0.3] - 2026-10-25
+
 ### Added
 
 - `ddlc-nunito-headings.css`, an optional snippet in each release that draws headings in Nunito Black also where Doki is installed
