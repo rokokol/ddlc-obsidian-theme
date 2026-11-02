@@ -29,7 +29,7 @@ check-pins.sh rokokol/ci-skill templates/check-pins.sh 3c695514d0a0723fde9f49ec3
 check-sh.sh rokokol/bash-best-practices-skill check-sh.sh a4f5f26191417564d0ebe122bf652dd7e3f74b50 37cb4b54dc245288c711b9665c9b4aedc496b1ce
 .github/workflows/vendor-sync.yml rokokol/ci-skill templates/github/workflows/vendor-sync.yml 3c695514d0a0723fde9f49ec3d857da9c803c0ad a5bde77f98d55a43b2c993f4c96a952e0b68010d manual
 .github/workflows/macos.yml rokokol/bash-best-practices-skill templates/github/workflows/macos.yml a4f5f26191417564d0ebe122bf652dd7e3f74b50 aa7a3b768209f56c3afa78a4fb9d0ed560d4c678 manual
-check-nix.sh rokokol/nix-best-practices-skill check-nix.sh bb5c1614c27476b43d962da6380b2021595e5537 174eead973a39475c5204fbe5771c5c746b64224
+check-nix.sh rokokol/nix-best-practices-skill check-nix.sh b630f92842b103c6b5f6c2fc1f7ed1ab69f1d088 3e6e3ff44550daaebf1600072ef2d0ea680e7a3a
 check-changelog.sh rokokol/versioning-skill check-changelog.sh b13ab46e2fb6dc6800b799b720849e02143ff345 103e3395a394fe6d39b8d7e0989107d9aa01c2e8
 vendor/lucide/LICENSE lucide-icons/lucide LICENSE b56741cf30c08fc7248bf41ddd3a261367aa9579 718bb3f0e44153809972abed31839375804bf652
 check-prose.sh rokokol/create-readme-skill check-prose.sh c912b7aa9584a16d57eb1d58d698d7fb1121669c 0438eca6ca155baf2b5fbbd8157747ec3619b579
