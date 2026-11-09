@@ -8,7 +8,6 @@ vendor/base16-ddlc-dark.yaml rokokol/ddlc-palette dist/base16-ddlc-dark.yaml f83
 vendor/lucide/minus.svg lucide-icons/lucide icons/minus.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 75093e27c20965c9e37fb9dcef9f939746c67578
 vendor/lucide/forward.svg lucide-icons/lucide icons/forward.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 ed78b022b936774f669dbe163b2e80da0e74dcb4
 vendor/lucide/calendar.svg lucide-icons/lucide icons/calendar.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 4679497031a9540a311f6223da003ce26f638e24
-vendor/lucide/triangle-alert.svg lucide-icons/lucide icons/triangle-alert.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 3232fb062dc26463279016cd7483677de9ef9bbd
 vendor/lucide/star.svg lucide-icons/lucide icons/star.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 b35bedd29fe765b729b3cd790e98574c4afde4c0
 vendor/lucide/quote.svg lucide-icons/lucide icons/quote.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 24e793a0b0c62339bfef1da069b97e6b004302fc
 vendor/lucide/map-pin.svg lucide-icons/lucide icons/map-pin.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 5d73fbd48b1e663493efaa4523b6c105f996146b
@@ -33,7 +32,7 @@ check-nix.sh rokokol/nix-best-practices-skill check-nix.sh b630f92842b103c6b5f6c
 check-changelog.sh rokokol/versioning-skill check-changelog.sh b13ab46e2fb6dc6800b799b720849e02143ff345 103e3395a394fe6d39b8d7e0989107d9aa01c2e8
 vendor/lucide/LICENSE lucide-icons/lucide LICENSE b56741cf30c08fc7248bf41ddd3a261367aa9579 718bb3f0e44153809972abed31839375804bf652
 check-prose.sh rokokol/create-readme-skill check-prose.sh c912b7aa9584a16d57eb1d58d698d7fb1121669c 0438eca6ca155baf2b5fbbd8157747ec3619b579
-vendor/ddlc-tokens.css rokokol/ddlc-themes dist/ddlc-tokens.css 0ee8f58fb0bb59d4a8e2fd3939dda89418564026 64cb294a71645d62c3379ef3b780bf9a9c87fe71
+vendor/ddlc-tokens.css rokokol/ddlc-themes dist/ddlc-tokens.css b7ee74d5c6d145fa045fec7010758d25a8badad5 b23d4ef1456ed7743fdb44a13f6dc3d78d26efad
 vendor/fonts/Nunito.woff2 rokokol/ddlc-themes dist/Nunito.woff2 db1f8d620306c281861703235622047e92801180 0d674561a26e9b3eb3808fda82df4b6129c0f511
 vendor/fonts/Nunito-Italic.woff2 rokokol/ddlc-themes dist/Nunito-Italic.woff2 db1f8d620306c281861703235622047e92801180 dc82b6927bddc8c29bb7266b263563607a7f31dc
 vendor/fonts/Nunito-LICENSE.txt rokokol/ddlc-themes dist/Nunito-LICENSE.txt db1f8d620306c281861703235622047e92801180 c8210f08ca3cece05b4f7baa428afe8e1abe3293
@@ -42,3 +41,4 @@ vendor/fonts/DepartureMono-LICENSE.txt rokokol/ddlc-themes dist/DepartureMono-LI
 vendor/nerd/DepartureMonoNerdFontMono-Regular.woff2 rokokol/ddlc-themes dist/DepartureMonoNerdFontMono-Regular.woff2 6fa4eb7d576a600b18d4282f9d376bfd06016ba6 71ce52832f35a596bb006a6c80c1a56ebdb06c58
 vendor/nerd/DepartureMonoNerdFont-LICENSE.txt rokokol/ddlc-themes dist/DepartureMonoNerdFont-LICENSE.txt 6fa4eb7d576a600b18d4282f9d376bfd06016ba6 de52476183807bbfc04e8ae7bced1dc9cbcbfd2f
 vendor/nerd/DepartureMonoNerdFont-README.md rokokol/ddlc-themes dist/DepartureMonoNerdFont-README.md 6fa4eb7d576a600b18d4282f9d376bfd06016ba6 aa9bbe42aa54a3501bf4f988bbfe705f588ece44
+vendor/lucide/triangle-alert.svg lucide-icons/lucide icons/triangle-exclamation-point.svg 3fef7aca71a50acc54bd2f24f0cc4747c22aa6d2 3232fb062dc26463279016cd7483677de9ef9bbd
