@@ -4,6 +4,10 @@ All notable changes to this theme are documented in this file. The format follow
 
 ## [Unreleased]
 
+### Fixed
+
+- Italic text in a pop-up's title draws without the title's outline, which closed up its counters until the word read as a smear. Bold text in the title already drew that way, and the upright text beside it is unchanged
+
 ## [1.0.3] - 2026-10-25
 
 ### Added

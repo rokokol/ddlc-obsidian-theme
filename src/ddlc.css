@@ -390,6 +390,14 @@ body {
   -webkit-text-stroke-color: var(--ddlc-stroke-color);
 }
 
+/* An emphatic word in a pop-up's title drops the outline, as a bold one in it already did.
+   The title's stroke is heavier than a heading's, and under it the italic's fill closed the
+   counters up until the word read as a smear. It keeps the colour italics get */
+.callout-title-inner :is(em, i, .cm-em) {
+  --ddlc-stroke-color: transparent;
+  -webkit-text-stroke-color: var(--ddlc-stroke-color);
+}
+
 .markdown-rendered h3,
 .markdown-rendered h4,
 .markdown-rendered h5,
