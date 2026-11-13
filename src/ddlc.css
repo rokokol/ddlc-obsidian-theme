@@ -754,6 +754,12 @@ body {
   background-color: var(--ddlc-board);
 }
 
+.theme-dark .callout .markdown-rendered blockquote,
+.theme-dark .markdown-rendered .callout blockquote {
+  --text-normal: var(--ddlc-text);
+  color: var(--text-normal);
+}
+
 .markdown-source-view.mod-cm6 .cm-line.HyperMD-quote {
   position: relative;
   background-color: var(--ddlc-board);

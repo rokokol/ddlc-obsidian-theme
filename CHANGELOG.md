@@ -4,6 +4,12 @@ All notable changes to this theme are documented in this file. The format follow
 
 ## [Unreleased]
 
+## [1.0.5] - 2026-11-14
+
+### Fixed
+
+- Quotes inside callouts use light text on their dark background in the dark theme
+
 ## [1.0.4] - 2026-11-09
 
 ### Fixed
