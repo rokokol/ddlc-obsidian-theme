@@ -23,7 +23,7 @@ vendor/lucide/trophy.svg lucide-icons/lucide icons/trophy.svg b56741cf30c08fc724
 vendor/lucide/trending-up.svg lucide-icons/lucide icons/trending-up.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 2ff1fb20265edb386d781dfa742e1d16a124c798
 vendor/lucide/trending-down.svg lucide-icons/lucide icons/trending-down.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 2ec045a07053474948f660e3f9ae969a415f23de
 vendor/lucide/copy.svg lucide-icons/lucide icons/copy.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 f62ce99c1f34989a5f70cd15192f8adf9140f4ed
-vendor/lucide/circle-question-mark.svg lucide-icons/lucide icons/circle-question-mark.svg b56741cf30c08fc7248bf41ddd3a261367aa9579 cf7e6efe84c4ff48cc150cccd1e7a0f2aabf3402
+vendor/lucide/circle-question-mark.svg lucide-icons/lucide icons/circle-question-mark.svg 799c2ca5e1ca7e39772b53165177d2e7a6266d7b 1d9c17584d7c9b89ac44eecefd4f96f5d9e82fe0
 check-pins.sh rokokol/ci-skill templates/check-pins.sh 3c695514d0a0723fde9f49ec3d857da9c803c0ad c86f8288606d532f7982206eea8e8a310315d7f6
 check-sh.sh rokokol/bash-best-practices-skill check-sh.sh a4f5f26191417564d0ebe122bf652dd7e3f74b50 37cb4b54dc245288c711b9665c9b4aedc496b1ce
 .github/workflows/vendor-sync.yml rokokol/ci-skill templates/github/workflows/vendor-sync.yml 3c695514d0a0723fde9f49ec3d857da9c803c0ad a5bde77f98d55a43b2c993f4c96a952e0b68010d manual
